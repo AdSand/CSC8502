@@ -19,7 +19,7 @@ public:
 
 	 void ToggleCamera();
 	 void GetCameraInfo();
-	 void AutoCameraUpdates(float dt, float timer);
+	 void AutoCameraUpdates(float dt);
 protected:
 
 	Camera* camera;
@@ -27,10 +27,21 @@ protected:
 	float timer = 0;
 	Vector3 cameraCheckpoints[4] = 
 	{
-		Vector3(45, 500, 500), // index 0
-		Vector3(1, 1, 1), // index 1
-		Vector3(2, 2, 2), // index 2
-		Vector3(3, 3, 3)  // index 3
+		Vector3(0, 500, 500), // index 0
+		Vector3(680, 250, 1350), // index 1
+		Vector3(2400, 1135, 1000), // index 2
+		Vector3(0, 300, 700)  // index 3
+	};
+	int currentCam = 0;
+
+	float pitches[3] =
+	{
+		0, 0, -15
+	};
+
+	float yaws[3] =
+	{
+		220, 220, 225
 	};
 
 	HeightMap* heightMap;

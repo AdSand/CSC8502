@@ -58,6 +58,7 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 	waterRotate = 0.0f;
 	waterCycle = 0.0f;
+	timer = -6.0f;
 	init = true;
 }
 
@@ -89,11 +90,12 @@ void Renderer::UpdateScene(float dt)
 	if (cameraUnlocked)
 	{
 		timer = 0;
+		currentCam = 0;
 		camera->UpdateCamera(dt);
 	}
 	else
 	{
-		AutoCameraUpdates(dt, timer);
+		AutoCameraUpdates(dt);
 	}
 
 	viewMatrix = camera->BuildViewMatrix();

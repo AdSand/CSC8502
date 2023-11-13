@@ -13,11 +13,26 @@ void Renderer::GetCameraInfo()
 	std::cout << "Yaw: " << camera->GetYaw() << std::endl;
 }
 
-void Renderer::AutoCameraUpdates(float dt, float timer)
+void Renderer::AutoCameraUpdates(float dt)
 {
-	//Vector3 direction = cameraCheckpoints[1] - cameraCheckpoints[0];
-		//camera->SetPosition(Vector3(45 * timer, 500, 500));
-	camera->SetPosition(cameraCheckpoints[0]);
-	camera->SetPitch(0);
-	camera->SetYaw(220);
+	Vector3 direction = (cameraCheckpoints[currentCam + 1] - cameraCheckpoints[currentCam]).Normalised();
+	camera->SetPosition(Vector3(
+		direction.x * timer * 80,
+		cameraCheckpoints[currentCam].y,
+		direction.z * timer * 80));
+	camera->SetPitch(pitches[currentCam]);
+	camera->SetYaw(yaws[currentCam]);
+	std::cout << currentCam << " and the timer: " << timer << std::endl;
+	if (timer > 5.0f)
+	{
+		timer = 0;
+		if (currentCam >= 2)
+		{
+			currentCam = 0;
+		}
+		else
+		{
+			currentCam += 1;
+		}
+	}
 }
