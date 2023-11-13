@@ -9,7 +9,7 @@ void Renderer::SetTextures()
 		SOIL_LOAD_RGB, SOIL_CREATE_NEW_ID, 0);
 
 	planetTex = SOIL_load_OGL_texture(TEXTUREDIR"Mossy_Rock_DIFF.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
-	planetBump = SOIL_load_OGL_texture(TEXTUREDIR"Mossy_Rock_BUMP.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
+	planetBump = SOIL_load_OGL_texture(TEXTUREDIR"Barren RedsDOT3.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 	waterTex = SOIL_load_OGL_texture(TEXTUREDIR"water.TGA", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 	moonTex = SOIL_load_OGL_texture(TEXTUREDIR"Rock_04_DIFF.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
 	crystalTex = SOIL_load_OGL_texture(TEXTUREDIR"crystal.TGA", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
@@ -60,12 +60,21 @@ void Renderer::SetupPlanetScene()
 	// create the crytal
 	CrystalCube* c = new CrystalCube();
 	c->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-	c->SetTransform(Matrix4::Translation(Vector3(2800, 800, 2800)));
+	c->SetTransform(Matrix4::Translation(Vector3(2950, 800, 2850)));
 	c->SetModelScale(Vector3(700.0f, 700.0f, 700.f));
 	c->SetBoundingRadius(500.0f);
 	c->SetMesh(cube);
 	c->SetTexture(crystalTex);
 	root->AddChild(c);
+
+	//SceneNode* p = new SceneNode();
+	//p->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+	//p->SetTransform(Matrix4::Translation(Vector3(2800, 180, 2800)));
+	//p->SetModelScale(Vector3(1000.0f, 10.0f, 1000.f));
+	//p->SetBoundingRadius(800.0f);
+	//p->SetMesh(sphere);
+	//p->SetTexture(crystalTex);
+	//root->AddChild(p);
 }
 
 void Renderer::DrawHeightMap()

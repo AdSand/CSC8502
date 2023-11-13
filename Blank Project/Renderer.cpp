@@ -47,8 +47,8 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 
 	camera = new Camera(-45.0f, 0.0f, heightmapSize * Vector3(0.5f, 5.0f, 0.5f));
 
-	light = new Light(heightmapSize * Vector3(0.5f, 1.5f, 0.5f), Vector4(1, 1, 1, 1), heightmapSize.x * 2);
-	crystalLight = new Light(heightmapSize * Vector3(0.5f, 1.5f, 0.5f), Vector4(0, 1, 1, 1), heightmapSize.x * 2);
+	light = new Light(heightmapSize * Vector3(0.5f, 5.5f, 0.5f), Vector4(1, 1, 1, 1), heightmapSize.x * 2);
+	//crystalLight = new Light(Vector3(2800, 300, 2800), Vector4(0, 1, 1, 1), 5000);
 
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
