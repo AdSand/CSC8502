@@ -60,9 +60,9 @@ void Renderer::SetupPlanetScene()
 	// create the crytal
 	CrystalCube* c = new CrystalCube();
 	c->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-	c->SetTransform(Matrix4::Translation(Vector3(2950, 800, 2850)));
+	c->SetTransform(Matrix4::Translation(Vector3(2800, 800, 2800)));
 	c->SetModelScale(Vector3(700.0f, 700.0f, 700.f));
-	c->SetBoundingRadius(500.0f);
+	c->SetBoundingRadius(700.0f);
 	c->SetMesh(cube);
 	c->SetTexture(crystalTex);
 	root->AddChild(c);
