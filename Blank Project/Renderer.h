@@ -35,7 +35,6 @@ protected:
 	HeightMap* heightMap;
 	Vector3 heightmapSize;
 	Light* light;
-	Light* crystalLight;
 
 	// Scene graph and management
 	void BuildNodeLists(SceneNode* from);

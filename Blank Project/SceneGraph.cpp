@@ -76,20 +76,20 @@ void Renderer::DrawNode(SceneNode* n)
 
 		if (n->GetTexture() == crystalTex)
 		{
-			BindShader(nodeShader);
-			//SetShaderLight(*crystalLight);
+			BindShader(lightShader);
+			SetShaderLight(*light);
 			UpdateShaderMatrices();
 
-			glUniform1i(glGetUniformLocation(nodeShader->GetProgram(), "diffuseTex"), 0);
+			glUniform1i(glGetUniformLocation(lightShader->GetProgram(), "diffuseTex"), 0);
 
 			Matrix4 model = n->GetWorldTransform() * Matrix4::Scale(n->GetModelScale());
-			glUniformMatrix4fv(glGetUniformLocation(nodeShader->GetProgram(), "modelMatrix"), 1, false, model.values);
-			glUniform4fv(glGetUniformLocation(nodeShader->GetProgram(), "nodeColour"), 1, (float*)&n->GetColour());
+			glUniformMatrix4fv(glGetUniformLocation(lightShader->GetProgram(), "modelMatrix"), 1, false, model.values);
+			glUniform4fv(glGetUniformLocation(lightShader->GetProgram(), "nodeColour"), 1, (float*)&n->GetColour());
 
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, crystalTex);
 
-			glUniform1i(glGetUniformLocation(nodeShader->GetProgram(), "useTexture"), crystalTex);
+			glUniform1i(glGetUniformLocation(lightShader->GetProgram(), "useTexture"), crystalTex);
 
 			n->Draw(*this);
 		}
