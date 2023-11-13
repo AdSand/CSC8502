@@ -25,6 +25,7 @@ protected:
 	Camera* camera;
 	bool cameraUnlocked = false;
 	float timer = 0;
+
 	Vector3 cameraCheckpoints[4] = 
 	{
 		Vector3(0, 500, 500), // index 0
@@ -43,6 +44,8 @@ protected:
 	{
 		220, 220, 225
 	};
+
+	const float cameraSpeed = 80.0f;
 
 	HeightMap* heightMap;
 	Vector3 heightmapSize;

@@ -1,5 +1,6 @@
 #include "Renderer.h"
 
+
 void Renderer::ToggleCamera()
 {
 	cameraUnlocked = cameraUnlocked ? false : true;
@@ -16,13 +17,16 @@ void Renderer::GetCameraInfo()
 void Renderer::AutoCameraUpdates(float dt)
 {
 	Vector3 direction = (cameraCheckpoints[currentCam + 1] - cameraCheckpoints[currentCam]).Normalised();
+
 	camera->SetPosition(Vector3(
-		direction.x * timer * 80,
+		direction.x * timer * cameraSpeed,
 		cameraCheckpoints[currentCam].y,
-		direction.z * timer * 80));
+		direction.z * timer * cameraSpeed));
+
 	camera->SetPitch(pitches[currentCam]);
 	camera->SetYaw(yaws[currentCam]);
-	std::cout << currentCam << " and the timer: " << timer << std::endl;
+
+	//std::cout << currentCam << " and the timer: " << timer << std::endl;
 	if (timer > 5.0f)
 	{
 		timer = 0;
