@@ -94,6 +94,11 @@ void Renderer::UpdateScene(float dt)
 	waterRotate += dt * 2.0f;
 	waterCycle += dt * 0.005f;
 	frameTime -= dt;
+	walkForwardTimer += dt;
+	if (walkForwardTimer > 3.0f)
+	{
+		walkForwardTimer = 0;
+	}
 	while (frameTime < 0.0f)
 	{
 		currentFrame = (currentFrame + 1) % roleTanim->GetFrameCount();

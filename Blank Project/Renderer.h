@@ -120,6 +120,7 @@ protected:
 
 	int currentFrame;
 	float frameTime;
+	float walkForwardTimer = 0;
 
 	// water
 	float waterRotate;
