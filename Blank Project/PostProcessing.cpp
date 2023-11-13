@@ -48,3 +48,8 @@ void Renderer::PresentScene()
 	glUniform1i(glGetUniformLocation(sceneShader->GetProgram(), " diffuseTex "), 0);
 	quad->Draw();
 }
+
+void Renderer::TogglePostProcessing()
+{
+	usePostProcessing = usePostProcessing ? false : true;
+}

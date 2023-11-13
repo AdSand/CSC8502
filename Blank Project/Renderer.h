@@ -18,6 +18,7 @@ public:
 	 void UpdateScene(float msec)	override;
 
 	 void ToggleCamera();
+	 void TogglePostProcessing();
 	 void GetCameraInfo();
 	 void AutoCameraUpdates(float dt);
 protected:
@@ -95,6 +96,7 @@ protected:
 	GLuint processFBO;
 	GLuint bufferColourTex[2];
 	GLuint bufferDepthTex;
+	bool usePostProcessing = false;
 
 	// textures
 	GLuint cubeMap;

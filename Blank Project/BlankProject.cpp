@@ -29,6 +29,11 @@ int main()	{
 			renderer.ToggleCamera();
 		}
 
+		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_V))
+		{
+			renderer.TogglePostProcessing();
+		}
+
 		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_I))
 		{
 			renderer.GetCameraInfo();
