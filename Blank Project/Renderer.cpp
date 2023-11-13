@@ -47,7 +47,7 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 
 	camera = new Camera(-45.0f, 0.0f, heightmapSize * Vector3(0.5f, 5.0f, 0.5f));
 
-	light = new Light(heightmapSize * Vector3(0.5f, 2.5f, 0.5f), Vector4(1, 1, 1, 1), heightmapSize.x * 2.5);
+	light = new Light(heightmapSize * Vector3(0.5f, 5.0f, 0.5f), Vector4(1, 1, 1, 1), heightmapSize.x * 1.5);
 
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
@@ -93,11 +93,7 @@ void Renderer::UpdateScene(float dt)
 	}
 	else
 	{
-		//Vector3 direction = cameraCheckpoints[1] - cameraCheckpoints[0];
-		//camera->SetPosition(Vector3(45 * timer, 500, 500));
-		camera->SetPosition(cameraCheckpoints[0]);
-		camera->SetPitch(0);
-		camera->SetYaw(220);
+		AutoCameraUpdates(dt, timer);
 	}
 
 	viewMatrix = camera->BuildViewMatrix();
@@ -110,6 +106,7 @@ void Renderer::UpdateScene(float dt)
 		frameTime += 1.0f / roleTanim->GetFrameRate();
 	}
 	frameFrustum.FromMatrix(projMatrix * viewMatrix);
+	//light->SetRadius(timer * 150);
 	root->Update(dt);
 }
 

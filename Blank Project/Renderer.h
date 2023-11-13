@@ -19,6 +19,7 @@ public:
 
 	 void ToggleCamera();
 	 void GetCameraInfo();
+	 void AutoCameraUpdates(float dt, float timer);
 protected:
 
 	Camera* camera;
