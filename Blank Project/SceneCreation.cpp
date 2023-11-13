@@ -21,9 +21,6 @@ void Renderer::SetTextures()
 	{
 		return;
 	}
-
-
-
 }
 
 void Renderer::DrawSkybox()
@@ -127,7 +124,7 @@ void Renderer::DrawRoleT()
 {
 	BindShader(animShader);
 	glUniform1i(glGetUniformLocation(animShader->GetProgram(), "diffuseTex"), 0);
-	modelMatrix = Matrix4::Translation(Vector3(800, 230, 1640)) * Matrix4::Scale(Vector3(150, 150, 150)) * Matrix4::Rotation(180, Vector3(0, 1, 0));
+	modelMatrix = Matrix4::Translation(Vector3(800, 230, 1640)) * Matrix4::Scale(Vector3(50, 50, 50)) * Matrix4::Rotation(180, Vector3(0, 1, 0));
 	UpdateShaderMatrices();
 
 
