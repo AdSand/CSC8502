@@ -110,6 +110,7 @@ protected:
 	Mesh* quad;
 	Mesh* sphere;
 	Mesh* cube;
+	Mesh* tree;
 
 	// animated soldier
 	Mesh* roleTmesh;

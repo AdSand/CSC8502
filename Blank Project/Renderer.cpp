@@ -5,6 +5,8 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 	quad = Mesh::GenerateQuad();
 	sphere = Mesh::LoadFromMeshFile("Sphere.msh");
 	cube = Mesh::LoadFromMeshFile("Cube.msh");
+	tree = Mesh::LoadFromMeshFile("Tree.msh");
+
 
 	roleTmesh = Mesh::LoadFromMeshFile("Role_T.msh");
 	roleTanim = new MeshAnimation("Role_T.anm");
@@ -95,7 +97,7 @@ void Renderer::UpdateScene(float dt)
 	waterCycle += dt * 0.005f;
 	frameTime -= dt;
 	walkForwardTimer += dt;
-	if (walkForwardTimer > 3.0f)
+	if (walkForwardTimer > 30.0f)
 	{
 		walkForwardTimer = 0;
 	}
