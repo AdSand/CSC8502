@@ -69,6 +69,8 @@ protected:
 	Shader* skyboxShader; // draw the skybox
 	Shader* nodeShader;
 	Shader* bumpShader;
+	Shader* processShader;
+	Shader* sceneShader;
 
 	//Shader* sceneShader; // shader to fill our GBuffer
 	//Shader* pointLightShader; // shader to calculate lighting
@@ -85,20 +87,14 @@ protected:
 	void DrawRoleT();
 	void SetupPlanetScene();
 	void DrawWater();
-	//void DrawPointLights();
+	void PresentScene();
+	void DrawPostProcess();
 
 	// FBOs
-	//GLuint bufferFBO; // FBO for our G-buffer pass
-	//GLuint bufferColourTex; // albedo goes here
-	//GLuint bufferNormalTex; // normals go here
-	//GLuint bufferDepthTex; // depth goes here
-
-	//GLuint pointLightFBO; // FBO for our lighting pass
-	//GLuint lightDiffuseTex; // Store diffuse lighting
-	//GLuint lightSpecularTex; // store specular lighting
-
-	//void GenerateScreenTexture(GLuint& into, bool depth = false);
-	//void CombineBuffers();
+	GLuint bufferFBO;
+	GLuint processFBO;
+	GLuint bufferColourTex[2];
+	GLuint bufferDepthTex;
 
 	// textures
 	GLuint cubeMap;

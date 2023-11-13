@@ -42,7 +42,7 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 
 	SetTextures();
 	SetShaders();
-	//SetFBOs();
+	SetFBOs();
 	SetupPlanetScene();
 
 	camera = new Camera(-45.0f, 0.0f, heightmapSize * Vector3(0.5f, 5.0f, 0.5f));
@@ -73,15 +73,6 @@ Renderer::~Renderer(void)
 	delete lightShader;
 	delete reflectShader;
 	delete skyboxShader;
-
-	//glDeleteFramebuffers(1, &bufferFBO);
-	//glDeleteFramebuffers(1, &pointLightFBO);
-
-	//glDeleteTextures(1, &bufferColourTex);
-	//glDeleteTextures(1, &bufferNormalTex);
-	//glDeleteTextures(1, &bufferDepthTex);
-	//glDeleteTextures(1, &lightDiffuseTex);
-	//glDeleteTextures(1, &lightSpecularTex);
 }
 
 void Renderer::UpdateScene(float dt)
@@ -99,6 +90,7 @@ void Renderer::UpdateScene(float dt)
 	}
 
 	viewMatrix = camera->BuildViewMatrix();
+	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 	waterRotate += dt * 2.0f;
 	waterCycle += dt * 0.005f;
 	frameTime -= dt;
@@ -117,12 +109,18 @@ void Renderer::RenderScene()
 	BuildNodeLists(root);
 	SortNodeLists();
 
-	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
+	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
 	DrawSkybox();
 	DrawHeightMap();
 	DrawWater();
 	DrawRoleT();
 	DrawNodes();
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	DrawPostProcess();
+	PresentScene();
+
 	ClearNodeLists();
 }
 

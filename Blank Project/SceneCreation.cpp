@@ -130,6 +130,7 @@ void Renderer::DrawWater()
 
 	UpdateShaderMatrices();
 	quad->Draw();
+	textureMatrix.ToIdentity();
 }
 
 void Renderer::DrawRoleT()

@@ -33,9 +33,20 @@ void Renderer::SetShaders()
 	}
 
 	bumpShader = new Shader("BumpVertex.glsl", "BumpFragment.glsl");
-	if (!bumpShader)
+	if (!bumpShader->LoadSuccess())
 	{
 		return;
 	}
 
+	processShader = new Shader("TexturedVertex.glsl", "processfrag.glsl");
+	if (!processShader->LoadSuccess())
+	{
+		return;
+	}
+
+	sceneShader = new Shader("TexturedVertex.glsl", "TexturedFragment.glsl");
+	if (!sceneShader->LoadSuccess())
+	{
+		return;
+	}
 }
