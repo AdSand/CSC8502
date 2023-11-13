@@ -49,7 +49,7 @@ void Renderer::SetupPlanetScene()
 	{
 		SceneNode* s = new SceneNode();
 		s->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-		s->SetTransform(Matrix4::Translation(Vector3(3000 + (rand() % 2000), -500 + (rand() % 800), -300.0f + 100.0f + 1000 * i)));
+		s->SetTransform(Matrix4::Translation(Vector3(-3000 - (rand() % 2000), -500 + (rand() % 800), -300.0f + 100.0f + 1000 * i)));
 		s->SetModelScale(Vector3(300.0f, 300.0f, 300.f));
 		s->SetBoundingRadius(300.0f);
 		s->SetMesh(sphere);
