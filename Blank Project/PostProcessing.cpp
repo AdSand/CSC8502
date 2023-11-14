@@ -35,8 +35,6 @@ void Renderer::DrawPostProcess()
 
 void Renderer::PresentScene()
 {
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	BindShader(sceneShader);
 	modelMatrix.ToIdentity();
 	viewMatrix.ToIdentity();

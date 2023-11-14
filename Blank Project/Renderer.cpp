@@ -124,6 +124,13 @@ void Renderer::RenderScene()
 	{
 		DrawPostProcess();
 	}
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+	PresentScene();
+
+	glViewport(0, 0, width / 2, height / 2);
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glClear(GL_DEPTH_BUFFER_BIT);
 	PresentScene();
 }
 
