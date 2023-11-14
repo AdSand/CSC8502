@@ -198,7 +198,7 @@ void Renderer::DrawShadowScene()
 	shadowMatrix = projMatrix * viewMatrix; // used later
 
 	heightMap->Draw();
-	DrawNodes();
+	DrawShadowNodes();
 
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 	glViewport(0, 0, width, height);

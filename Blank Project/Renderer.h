@@ -146,4 +146,5 @@ protected:
 	Shader* shadowSceneShader;
 	Shader* shadowShader;
 	void DrawShadowScene();
+	void DrawShadowNodes();
 };
