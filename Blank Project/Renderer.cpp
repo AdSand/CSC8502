@@ -107,6 +107,8 @@ void Renderer::RenderScene()
 	SortNodeLists();
 
 	DrawShadowScene();
+	viewMatrix = camera->BuildViewMatrix();
+	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -116,13 +118,13 @@ void Renderer::RenderScene()
 	DrawWater();
 	DrawRoleT();
 	DrawNodes();
+	ClearNodeLists();
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
 	if (usePostProcessing)
 	{
 		DrawPostProcess();
 	}
 	PresentScene();
-
-	ClearNodeLists();
 }
 
