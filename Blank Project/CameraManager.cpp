@@ -26,7 +26,6 @@ Vector3 Lerp(Vector3& start, Vector3 end, float time)
 
 void Renderer::AutoCameraUpdates()
 {
-	std::cout << currentCam << std::endl;
 	camera->SetPosition(Lerp(cameraCheckpoints[currentCam], cameraCheckpoints[currentCam + 1], timer));
 	camera->SetPitch(pitches[currentPitchYaw]);
 	camera->SetYaw(yaws[currentPitchYaw]);
