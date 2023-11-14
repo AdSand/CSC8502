@@ -119,7 +119,6 @@ void Renderer::RenderScene()
 	DrawRoleT();
 	DrawNodes();
 	ClearNodeLists();
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	if (usePostProcessing)
 	{
