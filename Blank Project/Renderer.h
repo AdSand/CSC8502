@@ -29,22 +29,22 @@ protected:
 
 	Vector3 cameraCheckpoints[6] = 
 	{
-		Vector3(0, 500, 0), // index 0
-		Vector3(1200, 500, 1240), // index 1
-		Vector3(3215, 300, 0), // index 2
-		Vector3(1786, 450, 300),  // index 3
-		Vector3(1876, 289, 1946),  // index 4
-		Vector3(1198, 289, 1922)  // index 5
+		Vector3(0, 500, 0),
+		Vector3(1200, 500, 1240),
+		Vector3(3215, 300, 0),
+		Vector3(1786, 450, 300),
+		Vector3(800, 424, 1996),
+		Vector3(1397, 424, 2095)
 	};
 
 	float pitches[3] =
 	{
-		0, -13, 7
+		0, 7, -14
 	};
 
 	float yaws[3] =
 	{
-		223, 163, 116
+		223, 203, 261
 	};
 
 	int currentCam = 0;
