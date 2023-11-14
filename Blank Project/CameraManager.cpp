@@ -14,29 +14,42 @@ void Renderer::GetCameraInfo()
 	std::cout << "Yaw: " << camera->GetYaw() << std::endl;
 }
 
+Vector3 Lerp(Vector3& start, Vector3 end, float time)
+{
+	Vector3 newPos = Vector3(
+		start.x + (end.x - start.x) * time * 0.2,
+		start.y + (end.y - start.y) * time * 0.2,
+		start.z + (end.z - start.z) * time * 0.2
+	);
+	return newPos;
+}
+
 void Renderer::AutoCameraUpdates(float dt)
 {
-	Vector3 direction = (cameraCheckpoints[currentCam + 1] - cameraCheckpoints[currentCam]).Normalised();
+	std::cout << currentCam << std::endl;
+	camera->SetPosition(Lerp(cameraCheckpoints[currentCam], cameraCheckpoints[currentCam + 1], timer));
+	camera->SetPitch(pitches[currentPitchYaw]);
+	camera->SetYaw(yaws[currentPitchYaw]);
 
-	camera->SetPosition(Vector3(
-		direction.x * timer * cameraSpeed,
-		cameraCheckpoints[currentCam].y,
-		direction.z * timer * cameraSpeed));
-
-	camera->SetPitch(pitches[currentCam]);
-	camera->SetYaw(yaws[currentCam]);
-
-	//std::cout << currentCam << " and the timer: " << timer << std::endl;
 	if (timer > 5.0f)
 	{
 		timer = 0;
-		if (currentCam >= 2)
+		if (currentCam >= 4)
 		{
 			currentCam = 0;
 		}
 		else
 		{
-			currentCam += 1;
+			currentCam += 2;
+		}
+
+		if (currentPitchYaw >= 2)
+		{
+			currentPitchYaw = 0;
+		}
+		else
+		{
+			currentPitchYaw++;
 		}
 	}
 }

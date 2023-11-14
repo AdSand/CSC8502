@@ -27,26 +27,28 @@ protected:
 	bool cameraUnlocked = false;
 	float timer = 0;
 
-	Vector3 cameraCheckpoints[4] = 
+	Vector3 cameraCheckpoints[6] = 
 	{
-		Vector3(0, 500, 500), // index 0
-		Vector3(680, 250, 1350), // index 1
-		Vector3(2400, 1135, 1000), // index 2
-		Vector3(0, 300, 700)  // index 3
+		Vector3(0, 500, 0), // index 0
+		Vector3(1200, 500, 1240), // index 1
+		Vector3(3215, 300, 0), // index 2
+		Vector3(1786, 450, 300),  // index 3
+		Vector3(1876, 289, 1946),  // index 4
+		Vector3(1198, 289, 1922)  // index 5
 	};
-	int currentCam = 0;
 
 	float pitches[3] =
 	{
-		0, 0, -15
+		0, -13, 7
 	};
 
 	float yaws[3] =
 	{
-		220, 220, 225
+		223, 163, 116
 	};
 
-	const float cameraSpeed = 80.0f;
+	int currentCam = 0;
+	int currentPitchYaw = 0;
 
 	HeightMap* heightMap;
 	Vector3 heightmapSize;
