@@ -89,7 +89,7 @@ void Renderer::UpdateScene(float dt)
 	}
 	else
 	{
-		AutoCameraUpdates(dt);
+		AutoCameraUpdates();
 	}
 
 	viewMatrix = camera->BuildViewMatrix();

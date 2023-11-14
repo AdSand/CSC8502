@@ -17,14 +17,14 @@ void Renderer::GetCameraInfo()
 Vector3 Lerp(Vector3& start, Vector3 end, float time)
 {
 	Vector3 newPos = Vector3(
-		start.x + (end.x - start.x) * time * 0.2,
-		start.y + (end.y - start.y) * time * 0.2,
-		start.z + (end.z - start.z) * time * 0.2
+		start.x + (end.x - start.x) * time * 0.15,
+		start.y + (end.y - start.y) * time * 0.15,
+		start.z + (end.z - start.z) * time * 0.15
 	);
 	return newPos;
 }
 
-void Renderer::AutoCameraUpdates(float dt)
+void Renderer::AutoCameraUpdates()
 {
 	std::cout << currentCam << std::endl;
 	camera->SetPosition(Lerp(cameraCheckpoints[currentCam], cameraCheckpoints[currentCam + 1], timer));

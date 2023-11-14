@@ -20,7 +20,7 @@ public:
 	 void ToggleCamera();
 	 void TogglePostProcessing();
 	 void GetCameraInfo();
-	 void AutoCameraUpdates(float dt);
+	 void AutoCameraUpdates();
 protected:
 
 	Camera* camera;
