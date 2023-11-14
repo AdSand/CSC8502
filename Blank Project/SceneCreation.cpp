@@ -75,6 +75,20 @@ void Renderer::SetupPlanetScene()
 	//p->SetMesh(sphere);
 	//p->SetTexture(crystalTex);
 	//root->AddChild(p);
+
+	// create the trees
+	for (int i = 0; i < 7; i++)
+	{
+		SceneNode* t = new SceneNode();
+		t->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		t->SetTransform(Matrix4::Translation(treePositions[i]));
+		t->SetModelScale(Vector3(25.0f, 25.0f, 25.f));
+		t->SetBoundingRadius(100.0f);
+		t->SetMesh(tree);
+		t->SetTexture(crystalTex);
+		root->AddChild(t);
+	}
+
 }
 
 void Renderer::DrawHeightMap()

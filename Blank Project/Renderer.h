@@ -126,4 +126,16 @@ protected:
 	// water
 	float waterRotate;
 	float waterCycle;
+
+	// trees
+	Vector3 treePositions[7] =
+	{
+		Vector3(2382, 230, 703),
+		Vector3(2979, 230, 1540),
+		Vector3(2026, 230, 1759),
+		Vector3(1498, 230, 2758),
+		Vector3(438, 230, 3197),
+		Vector3(1057, 230, 605),
+		Vector3(880, 230, 1654)
+	};
 };
