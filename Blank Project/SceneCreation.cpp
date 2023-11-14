@@ -185,22 +185,13 @@ void Renderer::DrawRoleT()
 
 void Renderer::DrawShadowScene()
 {
-	// generate a depth buffer image from the pointlight’s point of view, using a frame buffer object
-	//  first bind it (line 86) and clear whatever was previously in its buffers(line 88).
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
 	glClear(GL_DEPTH_BUFFER_BIT);
 
-	// shadow map depth buffer is much bigger than the screen resolution(by default 2048 * 2048).
-	// So, to render into all of it, we must temporarily increase OpenGL’s virtual window size
-	// Then, we enable the simple shader program
 	glViewport(0, 0, SHADOWSIZE, SHADOWSIZE);
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 
 	BindShader(shadowShader);
-
-	// create a view matrix, and calculate the correct ’shadow’ matrix to transform world space coordinates into ’light space’.
-	// takes two vectors - a viewpoint position, and a point in space for the view matrix to look at.
-	// In this case, we want our view matrix to have the light’s position as the origin, and be looking at the objects around the ’world’ origin
 
 	viewMatrix = Matrix4::BuildViewMatrix(light->GetPosition(), Vector3(0, 0, 0));
 	projMatrix = Matrix4::Perspective(1, 100, 1, 45);
@@ -209,10 +200,6 @@ void Renderer::DrawShadowScene()
 	heightMap->Draw();
 	DrawNodes();
 
-	// These draws should go into the shadow map and fill it with depth information
-	// once finished, we can restore OpenGL to a state suitable for rendering into the
-	// back buffer with - the colour mask is re - enabled(making colours writes work!), the viewport is set
-	// back to the screen resolution, and the shadow FBO is disabled.
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 	glViewport(0, 0, width, height);
 	viewMatrix = camera->BuildViewMatrix();

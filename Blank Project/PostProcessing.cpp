@@ -23,7 +23,7 @@ void Renderer::DrawPostProcess()
 		glBindTexture(GL_TEXTURE_2D, bufferColourTex[0]);
 		quad->Draw();
 
-		// now swap the colour buffers, and do the second blur pass
+		// swap the colour buffers, and do the second blur pass
 
 		glUniform1i(glGetUniformLocation(processShader->GetProgram(), "isVertical"), 1);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, bufferColourTex[0], 0);

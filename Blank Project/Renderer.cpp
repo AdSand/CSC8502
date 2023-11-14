@@ -7,7 +7,6 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 	cube = Mesh::LoadFromMeshFile("Cube.msh");
 	tree = Mesh::LoadFromMeshFile("Tree.msh");
 
-
 	roleTmesh = Mesh::LoadFromMeshFile("Role_T.msh");
 	roleTanim = new MeshAnimation("Role_T.anm");
 	roleTmaterial = new MeshMaterial("Role_T.mat");
@@ -25,20 +24,11 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 	currentFrame = 0;
 	frameTime = 0.0f;
 
-
-
-	// generate scene depth texture
-	//GenerateScreenTexture(bufferDepthTex, true); // true means we are generating a depth or colour texture
-	//GenerateScreenTexture(bufferColourTex);
-	//GenerateScreenTexture(bufferNormalTex);
-	//GenerateScreenTexture(lightDiffuseTex);
-	//GenerateScreenTexture(lightSpecularTex);
-
 	heightMap = new HeightMap(TEXTUREDIR"testspacetexture.png");
 	heightmapSize = heightMap->GetHeightmapSize();
 
 	root = new SceneNode();
-	// create the moon manager
+
 	moonManager = new MoonManager();
 	root->AddChild(moonManager);
 
@@ -54,7 +44,6 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
 	glEnable(GL_DEPTH_TEST);
-	//We’re going to use alpha-blending on the water
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
