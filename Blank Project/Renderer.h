@@ -10,6 +10,8 @@
 #include "MoonManager.h"
 #include "CrystalCube.h"
 
+#define SHADOWSIZE 2048
+
 class Renderer : public OGLRenderer	{
 public:
 	Renderer(Window &parent);
@@ -75,10 +77,6 @@ protected:
 	Shader* processShader;
 	Shader* sceneShader;
 
-	//Shader* sceneShader; // shader to fill our GBuffer
-	//Shader* pointLightShader; // shader to calculate lighting
-	//Shader* combineShader; // Combination render pass
-
 	// Setup the project
 	void SetFBOs();
 	void SetShaders();
@@ -140,4 +138,12 @@ protected:
 		Vector3(1057, 230, 605),
 		Vector3(880, 230, 1654)
 	};
+
+	// shadows
+	GLuint shadowTex;
+	GLuint shadowFBO;
+
+	Shader* shadowSceneShader;
+	Shader* shadowShader;
+	void DrawShadowScene();
 };

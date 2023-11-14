@@ -93,7 +93,8 @@ void Renderer::SetupPlanetScene()
 
 void Renderer::DrawHeightMap()
 {
-	BindShader(bumpShader);
+	//BindShader(bumpShader);
+	BindShader(shadowSceneShader);
 	SetShaderLight(*light);
 
 	glUniform3fv(glGetUniformLocation(bumpShader->GetProgram(), "cameraPos"), 1, (float*)&camera->GetPosition());
@@ -105,6 +106,10 @@ void Renderer::DrawHeightMap()
 	glUniform1i(glGetUniformLocation(bumpShader->GetProgram(), "bumpTex"), 1);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, planetBump);
+
+	glUniform1i(glGetUniformLocation(sceneShader->GetProgram(), "shadowTex"), 2);
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, shadowTex);
 
 	//reset the model and texture matrices back to identity - the water shader will be
 	// modifying these matrices later, and we don’t want this change to affect the heightmap
@@ -176,4 +181,40 @@ void Renderer::DrawRoleT()
 		glBindTexture(GL_TEXTURE_2D, roleTmatTextures[i]);
 		roleTmesh->DrawSubMesh(i);
 	}
+}
+
+void Renderer::DrawShadowScene()
+{
+	// generate a depth buffer image from the pointlight’s point of view, using a frame buffer object
+	//  first bind it (line 86) and clear whatever was previously in its buffers(line 88).
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	// shadow map depth buffer is much bigger than the screen resolution(by default 2048 * 2048).
+	// So, to render into all of it, we must temporarily increase OpenGL’s virtual window size
+	// Then, we enable the simple shader program
+	glViewport(0, 0, SHADOWSIZE, SHADOWSIZE);
+	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+
+	BindShader(shadowShader);
+
+	// create a view matrix, and calculate the correct ’shadow’ matrix to transform world space coordinates into ’light space’.
+	// takes two vectors - a viewpoint position, and a point in space for the view matrix to look at.
+	// In this case, we want our view matrix to have the light’s position as the origin, and be looking at the objects around the ’world’ origin
+
+	viewMatrix = Matrix4::BuildViewMatrix(light->GetPosition(), Vector3(0, 0, 0));
+	projMatrix = Matrix4::Perspective(1, 100, 1, 45);
+	shadowMatrix = projMatrix * viewMatrix; // used later
+
+	heightMap->Draw();
+	DrawNodes();
+
+	// These draws should go into the shadow map and fill it with depth information
+	// once finished, we can restore OpenGL to a state suitable for rendering into the
+	// back buffer with - the colour mask is re - enabled(making colours writes work!), the viewport is set
+	// back to the screen resolution, and the shadow FBO is disabled.
+	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+	glViewport(0, 0, width, height);
+	viewMatrix = camera->BuildViewMatrix();
+	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 }
