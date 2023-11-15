@@ -62,14 +62,40 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 Renderer::~Renderer(void)
 {
 	delete camera;
+	delete minimap;
+	delete spaceCamera;
 	delete heightMap;
+	delete light;
 	delete root;
-	delete quad;
-	delete sphere;
+	delete spaceRoot;
 
 	delete lightShader;
 	delete reflectShader;
 	delete skyboxShader;
+	delete nodeShader;
+	delete bumpShader;
+	delete processShader;
+	delete sceneShader;
+	delete basicShader;
+	delete animShader;
+
+	delete quad;
+	delete sphere;
+	delete cube;
+	delete tree;
+
+	delete roleTmesh;
+	delete roleTanim;
+	delete roleTmaterial;
+
+	glDeleteTextures(1, &shadowTex);
+	glDeleteTextures(1, &bufferDepthTex);
+	glDeleteTextures(2, bufferColourTex);
+
+	glDeleteBuffers(1, &shadowFBO);
+	glDeleteBuffers(1, &bufferFBO);
+	glDeleteBuffers(1, &processFBO);
+
 }
 
 void Renderer::UpdateScene(float dt)
