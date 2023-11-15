@@ -21,7 +21,7 @@ public:
 
 	 void ToggleCamera();
 	 void TogglePostProcessing();
-	 void ToggleSmallCamera();
+	 void ToggleSecondCamera();
 	 void GetCameraInfo();
 	 void AutoCameraUpdates();
 protected:
@@ -29,7 +29,7 @@ protected:
 	Camera* camera;
 	Camera* minimap;
 	Camera* spaceCamera;
-	int smallCamera = 0;
+	int secondCamera = 0;
 	bool cameraUnlocked = false;
 	float timer = 0;
 

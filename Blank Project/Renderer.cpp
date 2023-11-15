@@ -135,9 +135,34 @@ void Renderer::RenderScene()
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	PresentScene();
 
-	switch (smallCamera)
+	switch (secondCamera)
 	{
 	case 0:
+		// --- Don't show second camera ---
+		break;
+
+	case 1:
+		// --- Draw the space view ---
+		BuildNodeLists(spaceRoot);
+		SortNodeLists();
+
+		viewMatrix = spaceCamera->BuildViewMatrix();
+		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
+		glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+		DrawSkybox();
+		DrawNodes();
+		ClearNodeLists();
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glViewport(0, 0, width / 3, height / 3);
+		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
+		PresentScene();
+		break;
+	case 2:
 		// --- Draw the minimap ---
 		BuildNodeLists(root);
 		SortNodeLists();
@@ -154,28 +179,6 @@ void Renderer::RenderScene()
 		DrawWater();
 		DrawNodes();
 		DrawRoleT();
-		ClearNodeLists();
-
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glViewport(0, 0, width / 3, height / 3);
-		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
-		PresentScene();
-		break;
-
-	case 1:
-		// --- Draw the space view ---
-		BuildNodeLists(spaceRoot);
-		SortNodeLists();
-
-		viewMatrix = spaceCamera->BuildViewMatrix();
-		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
-
-		glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
-		glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-		DrawSkybox();
-		DrawNodes();
 		ClearNodeLists();
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);

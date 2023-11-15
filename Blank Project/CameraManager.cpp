@@ -53,11 +53,11 @@ void Renderer::AutoCameraUpdates()
 	}
 }
 
-void Renderer::ToggleSmallCamera()
+void Renderer::ToggleSecondCamera()
 {
-	smallCamera++;
-	if (smallCamera >= 2)
+	secondCamera++;
+	if (secondCamera >= 3)
 	{
-		smallCamera = 0;
+		secondCamera = 0;
 	}
 }

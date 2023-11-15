@@ -37,7 +37,7 @@ int main()	{
 
 		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_B))
 		{
-			renderer.ToggleSmallCamera();
+			renderer.ToggleSecondCamera();
 		}
 
 		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_I))
