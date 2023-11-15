@@ -150,10 +150,6 @@ void Renderer::RenderScene()
 		DrawNodes();
 		ClearNodeLists();
 
-		if (usePostProcessing)
-		{
-			DrawPostProcess();
-		}
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glViewport(0, 0, width / 3, height / 3);
 		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
