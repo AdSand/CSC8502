@@ -43,7 +43,7 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 
 	camera = new Camera(-45.0f, 0.0f, heightmapSize * Vector3(0.5f, 5.0f, 0.5f));
 	minimap = new Camera(-90, 180, Vector3(heightmapSize.x / 2, 5000, heightmapSize.z / 2));
-	spaceCamera = new Camera(-35.0f, 223.0f, Vector3(-1100, 2836, -1400));
+	spaceCamera = new Camera(7, 210, Vector3(1530, 1150, 1125));
 
 	light = new Light(heightmapSize * Vector3(0.5f, 5.0f, 0.5f), Vector4(1, 1, 1, 1), heightmapSize.x * 1.5);
 
@@ -168,7 +168,7 @@ void Renderer::RenderScene()
 		BuildNodeLists(spaceRoot);
 		SortNodeLists();
 
-		viewMatrix = camera->BuildViewMatrix();
+		viewMatrix = spaceCamera->BuildViewMatrix();
 		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
