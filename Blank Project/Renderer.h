@@ -80,6 +80,7 @@ protected:
 	Shader* bumpShader;
 	Shader* processShader;
 	Shader* sceneShader;
+	Shader* basicShader;
 
 	// Setup the project
 	void SetFBOs();
@@ -151,4 +152,6 @@ protected:
 	Shader* shadowShader;
 	void DrawShadowScene();
 	void DrawShadowNodes();
+
+	void DrawSmallPlanet();
 };

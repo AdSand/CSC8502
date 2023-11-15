@@ -61,4 +61,10 @@ void Renderer::SetShaders()
 	{
 		return;
 	}
+
+	basicShader = new Shader("TexturedVertex.glsl", "TexturedFragment.glsl");
+	if (!basicShader->LoadSuccess())
+	{
+		return;
+	}
 }

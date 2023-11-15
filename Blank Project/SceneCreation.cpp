@@ -203,3 +203,20 @@ void Renderer::DrawShadowScene()
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 	glViewport(0, 0, width, height);
 }
+
+void Renderer::DrawSmallPlanet()
+{
+	BindShader(basicShader);
+	glUniform1i(glGetUniformLocation(reflectShader->GetProgram(), "diffuseTex"), 0);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, planetTex);
+
+	modelMatrix =
+		Matrix4::Translation(Vector3(700, 900, 700)) *
+		Matrix4::Scale(Vector3(1000, 1000, 1000)) *
+		Matrix4::Rotation(walkForwardTimer * 15, Vector3(20, 0, 20));
+
+	UpdateShaderMatrices();
+	sphere->Draw();
+	textureMatrix.ToIdentity();
+}

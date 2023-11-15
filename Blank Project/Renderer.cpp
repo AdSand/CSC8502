@@ -169,7 +169,7 @@ void Renderer::RenderScene()
 		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		DrawSkybox();
-		DrawHeightMap();
+		DrawSmallPlanet();
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glViewport(0, 0, width / 3, height / 3);
