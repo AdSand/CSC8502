@@ -26,6 +26,7 @@ public:
 protected:
 
 	Camera* camera;
+	Camera* minimap;
 	bool cameraUnlocked = false;
 	float timer = 0;
 

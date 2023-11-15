@@ -38,6 +38,7 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 	SetupPlanetScene();
 
 	camera = new Camera(-45.0f, 0.0f, heightmapSize * Vector3(0.5f, 5.0f, 0.5f));
+	minimap = new Camera(-90, 180, Vector3(heightmapSize.x / 2, 5000, heightmapSize.z / 2));
 
 	light = new Light(heightmapSize * Vector3(0.5f, 5.0f, 0.5f), Vector4(1, 1, 1, 1), heightmapSize.x * 1.5);
 
@@ -128,13 +129,13 @@ void Renderer::RenderScene()
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	PresentScene();
 
-	// Draw the minimap
+	// --- Draw the minimap ---
 
 	BuildNodeLists(root);
 	SortNodeLists();
 
 	//DrawShadowScene();
-	viewMatrix = camera->BuildViewMatrix();
+	viewMatrix = minimap->BuildViewMatrix();
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
@@ -142,6 +143,7 @@ void Renderer::RenderScene()
 
 	DrawHeightMap();
 	DrawWater();
+	DrawNodes();
 	ClearNodeLists();
 
 	if (usePostProcessing)
