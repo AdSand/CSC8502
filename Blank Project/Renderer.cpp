@@ -28,14 +28,18 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 	heightmapSize = heightMap->GetHeightmapSize();
 
 	root = new SceneNode();
-
 	moonManager = new MoonManager();
 	root->AddChild(moonManager);
+
+	spaceRoot = new SceneNode();
+	spaceMoonManager = new MoonManager();
+	spaceRoot->AddChild(spaceMoonManager);
 
 	SetTextures();
 	SetShaders();
 	SetFBOs();
 	SetupPlanetScene();
+	SetupSpaceScene();
 
 	camera = new Camera(-45.0f, 0.0f, heightmapSize * Vector3(0.5f, 5.0f, 0.5f));
 	minimap = new Camera(-90, 180, Vector3(heightmapSize.x / 2, 5000, heightmapSize.z / 2));
@@ -101,6 +105,7 @@ void Renderer::UpdateScene(float dt)
 	frameFrustum.FromMatrix(projMatrix * viewMatrix);
 	//light->SetRadius(timer * 150);
 	root->Update(dt);
+	spaceRoot->Update(dt);
 }
 
 void Renderer::RenderScene()
@@ -160,14 +165,18 @@ void Renderer::RenderScene()
 
 	case 1:
 		// --- Draw the space view ---
-		viewMatrix = spaceCamera->BuildViewMatrix();
+		BuildNodeLists(spaceRoot);
+		SortNodeLists();
+
+		viewMatrix = camera->BuildViewMatrix();
 		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
-		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		DrawSkybox();
-		DrawSmallPlanet();
+		DrawNodes();
+		ClearNodeLists();
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glViewport(0, 0, width / 3, height / 3);

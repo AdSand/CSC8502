@@ -154,4 +154,8 @@ protected:
 	void DrawShadowNodes();
 
 	void DrawSmallPlanet();
+
+	void SetupSpaceScene();
+	SceneNode* spaceRoot;
+	MoonManager* spaceMoonManager;
 };

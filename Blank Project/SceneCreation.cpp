@@ -88,7 +88,6 @@ void Renderer::SetupPlanetScene()
 		t->SetTexture(crystalTex);
 		root->AddChild(t);
 	}
-
 }
 
 void Renderer::DrawHeightMap()
@@ -204,19 +203,43 @@ void Renderer::DrawShadowScene()
 	glViewport(0, 0, width, height);
 }
 
-void Renderer::DrawSmallPlanet()
+void Renderer::SetupSpaceScene()
 {
-	BindShader(basicShader);
-	glUniform1i(glGetUniformLocation(basicShader->GetProgram(), "diffuseTex"), 0);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, planetTex);
+	//moonManager->SetModelScale(Vector3(50.0f, 50.0f, 50.f));
+	//moonManager->SetBoundingRadius(50.0f);
+	//moonManager->SetMesh(sphere);
+	spaceMoonManager->SetTransform(Matrix4::Translation(heightmapSize * Vector3(0.5f, 5.0f, 0.5f)));
 
-	modelMatrix =
-		Matrix4::Translation(Vector3(700, 900, 700)) *
-		Matrix4::Scale(Vector3(700, 700, 700)) *
-		Matrix4::Rotation(walkForwardTimer * 15, Vector3(20, 0, 20));
+	// create the moons
+	for (int i = 0; i < 3; ++i)
+	{
+		SceneNode* s = new SceneNode();
+		s->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+		s->SetTransform(Matrix4::Translation(Vector3(-300 - (rand() % 200), -50 + (rand() % 80), -30.0f + 100.0f + 100 * i)));
+		s->SetModelScale(Vector3(50.0f, 50.0f, 50.f));
+		s->SetBoundingRadius(500.0f);
+		s->SetMesh(sphere);
+		s->SetTexture(moonTex);
+		spaceMoonManager->AddChild(s);
+	}
 
-	UpdateShaderMatrices();
-	sphere->Draw();
-	textureMatrix.ToIdentity();
+	// create the crytal
+	CrystalCube* c = new CrystalCube();
+	c->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+	c->SetTransform(Matrix4::Translation(Vector3(250, 100, 250)));
+	c->SetModelScale(Vector3(50.0f, 50.0f, 50.f));
+	c->SetBoundingRadius(100.0f);
+	c->SetMesh(cube);
+	c->SetTexture(crystalTex);
+	spaceMoonManager->AddChild(c);
+
+	// create the planet
+	SceneNode* d = new SceneNode();
+	d->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
+	d->SetTransform(Matrix4::Translation(Vector3(0, 0, 0)));
+	d->SetModelScale(Vector3(300.0f, 300.0f, 300.f));
+	d->SetBoundingRadius(300.0f);
+	d->SetMesh(sphere);
+	d->SetTexture(moonTex);
+	spaceMoonManager->AddChild(d);
 }
