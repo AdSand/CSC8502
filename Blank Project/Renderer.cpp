@@ -130,11 +130,10 @@ void Renderer::RenderScene()
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	PresentScene();
 
-	// --- Draw the minimap ---
-
 	switch (smallCamera)
 	{
 	case 0:
+		// --- Draw the minimap ---
 		BuildNodeLists(root);
 		SortNodeLists();
 
@@ -160,6 +159,7 @@ void Renderer::RenderScene()
 		break;
 
 	case 1:
+		// --- Draw the space view ---
 		viewMatrix = spaceCamera->BuildViewMatrix();
 		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
