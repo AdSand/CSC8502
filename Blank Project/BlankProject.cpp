@@ -35,6 +35,11 @@ int main()	{
 			renderer.TogglePostProcessing();
 		}
 
+		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_B))
+		{
+			renderer.ToggleMinimap();
+		}
+
 		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_I))
 		{
 			renderer.GetCameraInfo();

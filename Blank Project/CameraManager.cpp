@@ -52,3 +52,8 @@ void Renderer::AutoCameraUpdates()
 		}
 	}
 }
+
+void Renderer::ToggleMinimap()
+{
+	showingMinimap = showingMinimap ? false : true;
+}

@@ -21,12 +21,14 @@ public:
 
 	 void ToggleCamera();
 	 void TogglePostProcessing();
+	 void ToggleMinimap();
 	 void GetCameraInfo();
 	 void AutoCameraUpdates();
 protected:
 
 	Camera* camera;
 	Camera* minimap;
+	bool showingMinimap = true;
 	bool cameraUnlocked = false;
 	float timer = 0;
 

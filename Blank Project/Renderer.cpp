@@ -131,29 +131,49 @@ void Renderer::RenderScene()
 
 	// --- Draw the minimap ---
 
-	BuildNodeLists(root);
-	SortNodeLists();
-
-	//DrawShadowScene();
-	viewMatrix = minimap->BuildViewMatrix();
-	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
-	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-	DrawHeightMap();
-	DrawWater();
-	DrawNodes();
-	ClearNodeLists();
-
-	if (usePostProcessing)
+	if (showingMinimap)
 	{
-		DrawPostProcess();
+		BuildNodeLists(root);
+		SortNodeLists();
+
+		//DrawShadowScene();
+		viewMatrix = minimap->BuildViewMatrix();
+		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
+		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+		DrawSkybox();
+		DrawHeightMap();
+		DrawWater();
+		DrawNodes();
+		ClearNodeLists();
+
+		if (usePostProcessing)
+		{
+			DrawPostProcess();
+		}
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glViewport(0, 0, width / 3, height / 3);
+		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
+		PresentScene();
 	}
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0, 0, width / 4, height / 4);
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
-	PresentScene();
+	else
+	{
+		viewMatrix = minimap->BuildViewMatrix();
+		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
+		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+		DrawHeightMap();
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glViewport(0, 0, width / 3, height / 3);
+		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
+		PresentScene();
+	}
 }
 
