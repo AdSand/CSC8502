@@ -207,7 +207,7 @@ void Renderer::DrawShadowScene()
 void Renderer::DrawSmallPlanet()
 {
 	BindShader(basicShader);
-	glUniform1i(glGetUniformLocation(reflectShader->GetProgram(), "diffuseTex"), 0);
+	glUniform1i(glGetUniformLocation(basicShader->GetProgram(), "diffuseTex"), 0);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, planetTex);
 
