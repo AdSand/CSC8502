@@ -50,7 +50,7 @@ protected:
 
 	float yaws[3] =
 	{
-		223, 203, 261
+		223, 168, 261
 	};
 
 	int currentCam = 0;
