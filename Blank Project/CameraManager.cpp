@@ -53,7 +53,11 @@ void Renderer::AutoCameraUpdates()
 	}
 }
 
-void Renderer::ToggleMinimap()
+void Renderer::ToggleSmallCamera()
 {
-	showingMinimap = showingMinimap ? false : true;
+	smallCamera++;
+	if (smallCamera >= 2)
+	{
+		smallCamera = 0;
+	}
 }

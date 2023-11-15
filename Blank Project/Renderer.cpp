@@ -132,12 +132,13 @@ void Renderer::RenderScene()
 
 	// --- Draw the minimap ---
 
-	if (showingMinimap)
+	switch (smallCamera)
 	{
+	case 0:
 		BuildNodeLists(root);
 		SortNodeLists();
 
-		//DrawShadowScene();
+		DrawShadowScene();
 		viewMatrix = minimap->BuildViewMatrix();
 		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
@@ -148,6 +149,7 @@ void Renderer::RenderScene()
 		DrawHeightMap();
 		DrawWater();
 		DrawNodes();
+		DrawRoleT();
 		ClearNodeLists();
 
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -155,9 +157,9 @@ void Renderer::RenderScene()
 		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
 		PresentScene();
-	}
-	else
-	{
+		break;
+
+	case 1:
 		viewMatrix = spaceCamera->BuildViewMatrix();
 		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
@@ -172,6 +174,7 @@ void Renderer::RenderScene()
 		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
 		PresentScene();
+		break;
 	}
 }
 
