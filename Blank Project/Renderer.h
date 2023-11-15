@@ -28,6 +28,7 @@ protected:
 
 	Camera* camera;
 	Camera* minimap;
+	Camera* spaceCamera;
 	bool showingMinimap = true;
 	bool cameraUnlocked = false;
 	float timer = 0;
