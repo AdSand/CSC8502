@@ -55,10 +55,11 @@ void Renderer::DrawNode(SceneNode* n)
 {
 	if (n->GetMesh())
 	{
-		if (n->GetTexture() == moonTex)
+		if (n->GetTexture() == moonTex || n->GetTexture() == planetTex)
 		{
 			BindShader(nodeShader);
 			UpdateShaderMatrices();
+			GLuint texture = n->GetTexture();
 
 			glUniform1i(glGetUniformLocation(nodeShader->GetProgram(), "diffuseTex"), 0);
 
@@ -67,9 +68,9 @@ void Renderer::DrawNode(SceneNode* n)
 			glUniform4fv(glGetUniformLocation(nodeShader->GetProgram(), "nodeColour"), 1, (float*)&n->GetColour());
 
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, moonTex);
+			glBindTexture(GL_TEXTURE_2D, texture);
 
-			glUniform1i(glGetUniformLocation(nodeShader->GetProgram(), "useTexture"), moonTex);
+			glUniform1i(glGetUniformLocation(nodeShader->GetProgram(), "useTexture"), texture);
 
 			n->Draw(*this);
 		}

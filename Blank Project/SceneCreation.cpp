@@ -240,6 +240,6 @@ void Renderer::SetupSpaceScene()
 	d->SetModelScale(Vector3(300.0f, 300.0f, 300.f));
 	d->SetBoundingRadius(300.0f);
 	d->SetMesh(sphere);
-	d->SetTexture(moonTex);
+	d->SetTexture(planetTex);
 	spaceMoonManager->AddChild(d);
 }
