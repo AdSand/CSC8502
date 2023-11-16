@@ -31,26 +31,12 @@ void Renderer::FillBuffers()
 	glBindFramebuffer(GL_FRAMEBUFFER, deferredBufferFBO);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-	BindShader(depthSceneShader);
-	glUniform1i(glGetUniformLocation(depthSceneShader->GetProgram(), "diffuseTex"), 0);
-	glUniform1i(glGetUniformLocation(depthSceneShader->GetProgram(), "bumpTex"), 1);
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, planetTex);
-
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, planetBump);
-
-	modelMatrix.ToIdentity();
-	viewMatrix = camera->BuildViewMatrix();
-	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
-
 	UpdateShaderMatrices();
 
-	heightMap->Draw();
-	//DrawWater();
-	//DrawNodes();
-	//DrawRoleT();
+	DrawHeightMap();
+	DrawWater();
+	DrawNodes();
+	DrawRoleT();
 	ClearNodeLists();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -82,13 +68,12 @@ void Renderer::DrawPointLights()
 
 	Matrix4 invViewProj = (projMatrix * viewMatrix).Inverse();
 	glUniformMatrix4fv(glGetUniformLocation(pointLightShader->GetProgram(), "inverseProjView"), 1, false, invViewProj.values);
-
+	modelMatrix.ToIdentity();
 	UpdateShaderMatrices();
 
 	for (int i = 0; i < LIGHT_NUM; ++i)
 	{
 		Light& l = pointLights[i];
-		
 		SetShaderLight(l);
 		sphere->Draw();
 	}

@@ -41,11 +41,11 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 	for (int i = 0; i < LIGHT_NUM; ++i)
 	{
 		Light& l = pointLights[i];
-		l.SetPosition(Vector3(rand() % (int)heightmapSize.x, 200.0f, rand() % (int)heightmapSize.z));
+		l.SetPosition(Vector3(rand() % (int)heightmapSize.x, 150, rand() % (int)heightmapSize.z));
 		l.SetColour(Vector4(0.5f + (float)(rand() / (float)RAND_MAX),
 			0.5f + (float)(rand() / (float)RAND_MAX),
 			0.5f + (float)(rand() / (float)RAND_MAX), 1));
-		l.SetRadius(250.0f + (rand() % 500));
+		l.SetRadius(250.0f + (rand() % 250));
 	}
 
 	SetTextures();
