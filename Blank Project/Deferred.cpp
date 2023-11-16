@@ -48,8 +48,9 @@ void Renderer::FillBuffers()
 	UpdateShaderMatrices();
 
 	heightMap->Draw();
-	//DrawWater();
-	//DrawNodes();
+	DrawWater();
+	DrawNodes();
+	DrawRoleT();
 	ClearNodeLists();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -78,8 +79,8 @@ void Renderer::DrawPointLights()
 
 	glUniform3fv(glGetUniformLocation(pointLightShader->GetProgram(), "cameraPos"), 1, (float*)&camera->GetPosition());
 	glUniform2f(glGetUniformLocation(pointLightShader->GetProgram(), "pixelSize"), 1.0f / width, 1.0f / height);
+	UpdateShaderMatrices();
 
-	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 	Matrix4 invViewProj = (projMatrix * viewMatrix).Inverse();
 	glUniformMatrix4fv(glGetUniformLocation(pointLightShader->GetProgram(), "inverseProjView"), 1, false, invViewProj.values);
 

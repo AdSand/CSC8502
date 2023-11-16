@@ -11,7 +11,7 @@
 #include "CrystalCube.h"
 
 #define SHADOWSIZE 2048
-const int LIGHT_NUM = 32;
+const int LIGHT_NUM = 320;
 
 class Renderer : public OGLRenderer	{
 public:

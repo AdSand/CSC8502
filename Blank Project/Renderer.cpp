@@ -45,7 +45,7 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 		l.SetColour(Vector4(0.5f + (float)(rand() / (float)RAND_MAX),
 			0.5f + (float)(rand() / (float)RAND_MAX),
 			0.5f + (float)(rand() / (float)RAND_MAX), 1));
-		l.SetRadius(250.0f + (rand() % 250));
+		l.SetRadius(250.0f + (rand() % 2050));
 	}
 
 	SetTextures();
