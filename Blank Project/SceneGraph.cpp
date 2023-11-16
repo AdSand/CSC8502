@@ -55,7 +55,7 @@ void Renderer::DrawNode(SceneNode* n)
 {
 	if (n->GetMesh())
 	{
-		if (n->GetTexture() == moonTex || n->GetTexture() == planetTex)
+		if (n->GetTexture() == planetTex)
 		{
 			BindShader(nodeShader);
 			UpdateShaderMatrices();
@@ -75,10 +75,11 @@ void Renderer::DrawNode(SceneNode* n)
 			n->Draw(*this);
 		}
 
-		if (n->GetTexture() == crystalTex)
+		if (n->GetTexture() == moonTex || n->GetTexture() == crystalTex)
 		{
 			BindShader(lightShader);
 			SetShaderLight(*light);
+			GLuint texture = n->GetTexture();
 			UpdateShaderMatrices();
 
 			glUniform1i(glGetUniformLocation(lightShader->GetProgram(), "diffuseTex"), 0);
@@ -88,9 +89,9 @@ void Renderer::DrawNode(SceneNode* n)
 			glUniform4fv(glGetUniformLocation(lightShader->GetProgram(), "nodeColour"), 1, (float*)&n->GetColour());
 
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, crystalTex);
+			glBindTexture(GL_TEXTURE_2D, texture);
 
-			glUniform1i(glGetUniformLocation(lightShader->GetProgram(), "useTexture"), crystalTex);
+			glUniform1i(glGetUniformLocation(lightShader->GetProgram(), "useTexture"), texture);
 
 			n->Draw(*this);
 		}
