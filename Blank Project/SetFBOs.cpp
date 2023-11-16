@@ -55,6 +55,7 @@ void Renderer::SetFBOs()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	// ------------------------------------------------------------------------------------------------
+	// --- deferred shading ---
 
 	// generate 2 FBOs for first and second passes. Third outputs to back buffer
 	glGenFramebuffers(1, &deferredBufferFBO);
@@ -66,7 +67,7 @@ void Renderer::SetFBOs()
 	};
 
 	// generate scene depth texture
-	GenerateScreenTexture(deferredBufferDepthTex, true); // true means we are generating a depth or colour texture
+	GenerateScreenTexture(deferredBufferDepthTex, true); // bool for if we are generating a depth or colour texture
 	GenerateScreenTexture(deferredBufferColourTex);
 	GenerateScreenTexture(deferredBufferNormalTex);
 	GenerateScreenTexture(lightDiffuseTex);
