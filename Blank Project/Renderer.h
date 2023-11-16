@@ -100,6 +100,10 @@ protected:
 	void PresentScene();
 	void DrawPostProcess();
 
+	void ViewPlanetScene();
+	void ViewSpaceScene();
+	void ViewMinimap();
+
 	// FBOs
 	GLuint bufferFBO;
 	GLuint processFBO;

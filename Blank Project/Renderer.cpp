@@ -135,6 +135,27 @@ void Renderer::UpdateScene(float dt)
 
 void Renderer::RenderScene()
 {
+	ViewPlanetScene();
+
+	switch (secondCamera)
+	{
+	case 0:
+		// --- Don't show second camera ---
+		break;
+
+	case 1:
+		// --- Draw the space view ---
+		ViewSpaceScene();
+		break;
+	case 2:
+		// --- Draw the minimap ---
+		ViewMinimap();
+		break;
+	}
+}
+
+void Renderer::ViewPlanetScene()
+{
 	viewMatrix = camera->BuildViewMatrix();
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 	currentCameraF = camera;
@@ -163,67 +184,61 @@ void Renderer::RenderScene()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	PresentScene();
+}
 
-	switch (secondCamera)
-	{
-	case 0:
-		// --- Don't show second camera ---
-		break;
+void Renderer::ViewSpaceScene()
+{
+	viewMatrix = spaceCamera->BuildViewMatrix();
+	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+	currentCameraF = spaceCamera;
+	currentFrustum.FromMatrix(projMatrix * viewMatrix);
+	BuildNodeLists(spaceRoot, &currentFrustum, currentCameraF);
+	SortNodeLists();
 
-	case 1:
-		// --- Draw the space view ---
-		viewMatrix = spaceCamera->BuildViewMatrix();
-		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
-		currentCameraF = spaceCamera;
-		currentFrustum.FromMatrix(projMatrix * viewMatrix);
-		BuildNodeLists(spaceRoot, &currentFrustum, currentCameraF);
-		SortNodeLists();
+	viewMatrix = spaceCamera->BuildViewMatrix();
+	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
-		viewMatrix = spaceCamera->BuildViewMatrix();
-		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
+	glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-		glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
-		glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	DrawSkybox();
+	DrawNodes();
+	ClearNodeLists();
 
-		DrawSkybox();
-		DrawNodes();
-		ClearNodeLists();
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, width / 3, height / 3);
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
+	PresentScene();
+}
 
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glViewport(0, 0, width / 3, height / 3);
-		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
-		PresentScene();
-		break;
-	case 2:
-		// --- Draw the minimap ---
-		viewMatrix = minimap->BuildViewMatrix();
-		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
-		currentCameraF = minimap;
-		currentFrustum.FromMatrix(projMatrix * viewMatrix);
-		BuildNodeLists(root, &currentFrustum, currentCameraF);
-		SortNodeLists();
+void Renderer::ViewMinimap()
+{
+	viewMatrix = minimap->BuildViewMatrix();
+	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+	currentCameraF = minimap;
+	currentFrustum.FromMatrix(projMatrix * viewMatrix);
+	BuildNodeLists(root, &currentFrustum, currentCameraF);
+	SortNodeLists();
 
-		DrawShadowScene();
-		viewMatrix = minimap->BuildViewMatrix();
-		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+	DrawShadowScene();
+	viewMatrix = minimap->BuildViewMatrix();
+	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
-		glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
-		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
+	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-		DrawSkybox();
-		DrawHeightMap();
-		DrawWater();
-		DrawNodes();
-		DrawRoleT();
-		ClearNodeLists();
+	DrawSkybox();
+	DrawHeightMap();
+	DrawWater();
+	DrawNodes();
+	DrawRoleT();
+	ClearNodeLists();
 
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glViewport(0, 0, width / 3, height / 3);
-		//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
-		PresentScene();
-		break;
-	}
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, width / 3, height / 3);
+	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
+	PresentScene();
 }
 
