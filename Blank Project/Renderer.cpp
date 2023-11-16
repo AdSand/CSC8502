@@ -92,7 +92,7 @@ Renderer::~Renderer(void)
 	delete sceneShader;
 	delete basicShader;
 	delete animShader;
-	delete depthSceneShader;
+	delete deferredSceneShader;
 	delete pointLightShader;
 	delete combineShader;
 
