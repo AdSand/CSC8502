@@ -41,11 +41,11 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 	for (int i = 0; i < LIGHT_NUM; ++i)
 	{
 		Light& l = pointLights[i];
-		l.SetPosition(Vector3(rand() % (int)heightmapSize.x, 150.0f, rand() % (int)heightmapSize.z));
+		l.SetPosition(Vector3(rand() % (int)heightmapSize.x, 200.0f, rand() % (int)heightmapSize.z));
 		l.SetColour(Vector4(0.5f + (float)(rand() / (float)RAND_MAX),
 			0.5f + (float)(rand() / (float)RAND_MAX),
 			0.5f + (float)(rand() / (float)RAND_MAX), 1));
-		l.SetRadius(250.0f + (rand() % 2050));
+		l.SetRadius(250.0f + (rand() % 500));
 	}
 
 	SetTextures();
@@ -137,8 +137,6 @@ void Renderer::UpdateScene(float dt)
 		AutoCameraUpdates();
 	}
 
-	viewMatrix = camera->BuildViewMatrix();
-	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 	waterRotate += dt * 2.0f;
 	waterCycle += dt * 0.005f;
 	frameTime -= dt;
@@ -152,7 +150,6 @@ void Renderer::UpdateScene(float dt)
 		currentFrame = (currentFrame + 1) % roleTanim->GetFrameCount();
 		frameTime += 1.0f / roleTanim->GetFrameRate();
 	}
-	frameFrustum.FromMatrix(projMatrix * viewMatrix);
 	root->Update(dt);
 	spaceRoot->Update(dt);
 }
