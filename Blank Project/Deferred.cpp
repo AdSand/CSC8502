@@ -126,5 +126,6 @@ void Renderer::CombineBuffers()
 	glViewport(0, 0, width / 2.5, height / 2.5);
 	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
+
 	quad->Draw();
 }
