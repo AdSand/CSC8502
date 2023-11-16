@@ -43,9 +43,9 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 		Light& l = pointLights[i];
 		l.SetPosition(Vector3(rand() % (int)heightmapSize.x, 150, rand() % (int)heightmapSize.z));
 		l.SetColour(Vector4(0.5f + (float)(rand() / (float)RAND_MAX),
-			0.5f + (float)(rand() / (float)RAND_MAX),
-			0.5f + (float)(rand() / (float)RAND_MAX), 1));
-		l.SetRadius(250.0f + (rand() % 250));
+			0.1f + (float)(rand() / (float)RAND_MAX),
+			0.7f + (float)(rand() / (float)RAND_MAX), 1));
+		l.SetRadius(250.0f + (rand() % 1000));
 	}
 
 	SetTextures();
@@ -64,7 +64,7 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 	waterRotate = 0.0f;
 	waterCycle = 0.0f;

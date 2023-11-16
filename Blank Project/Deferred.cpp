@@ -41,10 +41,6 @@ void Renderer::FillBuffers()
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, planetBump);
 
-	modelMatrix.ToIdentity();
-	viewMatrix = camera->BuildViewMatrix();
-	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
-
 	UpdateShaderMatrices();
 
 	heightMap->Draw();
