@@ -61,7 +61,7 @@ protected:
 	Light* light;
 
 	// Scene graph and management
-	void BuildNodeLists(SceneNode* from);
+	void BuildNodeLists(SceneNode* from, Frustum* currentF, Camera* currentC);
 	void SortNodeLists();
 	void ClearNodeLists();
 	void DrawNodes();
@@ -71,6 +71,10 @@ protected:
 	SceneNode* root;
 	MoonManager* moonManager;
 	Frustum frameFrustum;
+
+	Frustum currentFrustum;
+	Camera* currentCameraF;
+	
 
 	// shaders
 	Shader* lightShader;

@@ -129,14 +129,17 @@ void Renderer::UpdateScene(float dt)
 		frameTime += 1.0f / roleTanim->GetFrameRate();
 	}
 	frameFrustum.FromMatrix(projMatrix * viewMatrix);
-	//light->SetRadius(timer * 150);
 	root->Update(dt);
 	spaceRoot->Update(dt);
 }
 
 void Renderer::RenderScene()
 {
-	BuildNodeLists(root);
+	viewMatrix = camera->BuildViewMatrix();
+	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+	currentCameraF = camera;
+	currentFrustum.FromMatrix(projMatrix * viewMatrix);
+	BuildNodeLists(root, &currentFrustum, currentCameraF);
 	SortNodeLists();
 
 	DrawShadowScene();
@@ -169,7 +172,11 @@ void Renderer::RenderScene()
 
 	case 1:
 		// --- Draw the space view ---
-		BuildNodeLists(spaceRoot);
+		viewMatrix = spaceCamera->BuildViewMatrix();
+		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+		currentCameraF = spaceCamera;
+		currentFrustum.FromMatrix(projMatrix * viewMatrix);
+		BuildNodeLists(spaceRoot, &currentFrustum, currentCameraF);
 		SortNodeLists();
 
 		viewMatrix = spaceCamera->BuildViewMatrix();
@@ -190,7 +197,11 @@ void Renderer::RenderScene()
 		break;
 	case 2:
 		// --- Draw the minimap ---
-		BuildNodeLists(root);
+		viewMatrix = minimap->BuildViewMatrix();
+		projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+		currentCameraF = minimap;
+		currentFrustum.FromMatrix(projMatrix * viewMatrix);
+		BuildNodeLists(root, &currentFrustum, currentCameraF);
 		SortNodeLists();
 
 		DrawShadowScene();

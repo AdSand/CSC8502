@@ -1,10 +1,10 @@
 #include "Renderer.h"
 
-void Renderer::BuildNodeLists(SceneNode* from)
+void Renderer::BuildNodeLists(SceneNode* from, Frustum* currentF, Camera* currentC)
 {
-	if (frameFrustum.InsideFrustum(*from))
+	if (currentF->InsideFrustum(*from))
 	{
-		Vector3 dir = from->GetWorldTransform().GetPositionVector() - camera->GetPosition();
+		Vector3 dir = from->GetWorldTransform().GetPositionVector() - currentC->GetPosition();
 		from->SetCameraDistance(Vector3::Dot(dir, dir));
 
 		if (from->GetColour().w < 1.0f)
@@ -19,7 +19,7 @@ void Renderer::BuildNodeLists(SceneNode* from)
 
 	for (vector<SceneNode*>::const_iterator i = from->GetChildIteratorStart(); i != from->GetChildIteratorEnd(); ++i)
 	{
-		BuildNodeLists((*i));
+		BuildNodeLists((*i), currentF, currentC);
 	}
 }
 
