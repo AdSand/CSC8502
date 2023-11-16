@@ -226,8 +226,8 @@ void Renderer::SetupSpaceScene()
 	// create the crytal
 	CrystalCube* c = new CrystalCube();
 	c->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-	c->SetTransform(Matrix4::Translation(Vector3(250, 100, 250)));
-	c->SetModelScale(Vector3(50.0f, 50.0f, 50.f));
+	c->SetTransform(Matrix4::Translation(Vector3(-250, 100, -250)));
+	c->SetModelScale(Vector3(30.0f, 30.0f, 30.f));
 	c->SetBoundingRadius(100.0f);
 	c->SetMesh(cube);
 	c->SetTexture(crystalTex);
