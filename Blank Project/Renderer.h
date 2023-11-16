@@ -34,24 +34,26 @@ protected:
 	bool cameraUnlocked = false;
 	float timer = 0;
 
-	Vector3 cameraCheckpoints[6] = 
+	Vector3 cameraCheckpoints[8] = 
 	{
 		Vector3(0, 500, 0),
 		Vector3(1200, 500, 1240),
 		Vector3(3215, 300, 0),
 		Vector3(1786, 450, 300),
 		Vector3(800, 424, 1996),
-		Vector3(1397, 424, 2095)
+		Vector3(1397, 424, 2095),
+		Vector3(1473, 140, 1583),
+		Vector3(1473, 100, 1583)
 	};
 
-	float pitches[3] =
+	float pitches[4] =
 	{
-		0, 7, -14
+		0, 7, -14, 0
 	};
 
-	float yaws[3] =
+	float yaws[4] =
 	{
-		223, 168, 261
+		223, 168, 261, 50
 	};
 
 	int currentCam = 0;

@@ -33,7 +33,8 @@ void Renderer::AutoCameraUpdates()
 	if (timer > 5.0f)
 	{
 		timer = 0;
-		if (currentCam >= 4)
+		// increase by 2 for every added camera movement
+		if (currentCam >= 6)
 		{
 			currentCam = 0;
 		}
@@ -42,7 +43,8 @@ void Renderer::AutoCameraUpdates()
 			currentCam += 2;
 		}
 
-		if (currentPitchYaw >= 2)
+		// increase by 1 for every added camera movement
+		if (currentPitchYaw >= 3)
 		{
 			currentPitchYaw = 0;
 		}
