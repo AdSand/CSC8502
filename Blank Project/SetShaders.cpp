@@ -68,7 +68,6 @@ void Renderer::SetShaders()
 		return;
 	}
 
-	depthSceneShader = new Shader("bumpVertex.glsl", "bufferFragment.glsl");
 	pointLightShader = new Shader("pointLightVert.glsl", "pointLightFrag.glsl");
 	combineShader = new Shader("combineVert.glsl", "combineFrag.glsl");
 }

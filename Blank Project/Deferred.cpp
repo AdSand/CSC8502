@@ -63,7 +63,7 @@ void Renderer::DrawPointLights()
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, deferredBufferNormalTex);
 
-	glUniform3fv(glGetUniformLocation(pointLightShader->GetProgram(), "cameraPos"), 1, (float*)&camera->GetPosition());
+	glUniform3fv(glGetUniformLocation(pointLightShader->GetProgram(), "cameraPos"), 1, (float*)&spaceCamera->GetPosition());
 	glUniform2f(glGetUniformLocation(pointLightShader->GetProgram(), "pixelSize"), 1.0f / width, 1.0f / height);
 
 	Matrix4 invViewProj = (projMatrix * viewMatrix).Inverse();
