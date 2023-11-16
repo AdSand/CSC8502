@@ -79,6 +79,7 @@ Renderer::~Renderer(void)
 	delete spaceCamera;
 	delete heightMap;
 	delete light;
+	delete[] pointLights;
 	delete root;
 	delete spaceRoot;
 
@@ -91,6 +92,9 @@ Renderer::~Renderer(void)
 	delete sceneShader;
 	delete basicShader;
 	delete animShader;
+	delete depthSceneShader;
+	delete pointLightShader;
+	delete combineShader;
 
 	delete quad;
 	delete sphere;
@@ -104,10 +108,17 @@ Renderer::~Renderer(void)
 	glDeleteTextures(1, &shadowTex);
 	glDeleteTextures(1, &bufferDepthTex);
 	glDeleteTextures(2, bufferColourTex);
+	glDeleteTextures(1, &deferredBufferColourTex);
+	glDeleteTextures(1, &deferredBufferNormalTex);
+	glDeleteTextures(1, &deferredBufferDepthTex);
+	glDeleteTextures(1, &lightDiffuseTex);
+	glDeleteTextures(1, &lightSpecularTex);
 
 	glDeleteBuffers(1, &shadowFBO);
 	glDeleteBuffers(1, &bufferFBO);
 	glDeleteBuffers(1, &processFBO);
+	glDeleteBuffers(1, &pointLightFBO);
+	glDeleteBuffers(1, &deferredBufferFBO);
 
 }
 

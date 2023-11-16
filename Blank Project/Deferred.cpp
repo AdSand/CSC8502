@@ -125,7 +125,7 @@ void Renderer::CombineBuffers()
 	glBindTexture(GL_TEXTURE_2D, lightSpecularTex);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0, 0, width / 3, height / 3);
+	glViewport(0, 0, width / 2.5, height / 2.5);
 	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
 	quad->Draw();
