@@ -101,8 +101,8 @@ void Renderer::DrawShadowNodes()
 {
 	for (int i = 0; i < 6; i++)
 	{
-		modelMatrix = Matrix4::Translation(Vector3(0, 300, 0)) * Matrix4::Scale(Vector3(100, 100, 100));
+		modelMatrix = Matrix4::Translation(treePositions[i]) * Matrix4::Scale(Vector3(100, 100, 100));
 		UpdateShaderMatrices();
-		cube->Draw();
+		tree->Draw();
 	}
 }

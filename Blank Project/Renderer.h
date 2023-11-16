@@ -11,6 +11,7 @@
 #include "CrystalCube.h"
 
 #define SHADOWSIZE 2048
+const int LIGHT_NUM = 32;
 
 class Renderer : public OGLRenderer	{
 public:
@@ -164,4 +165,26 @@ protected:
 	void SetupSpaceScene();
 	SceneNode* spaceRoot;
 	MoonManager* spaceMoonManager;
+
+	// deferred
+	void FillBuffers();
+	void DrawPointLights();
+	void CombineBuffers();
+
+	void GenerateScreenTexture(GLuint& into, bool depth = false);
+
+	Shader* depthSceneShader;
+	Shader* pointLightShader;
+	Shader* combineShader;
+
+	GLuint deferredBufferFBO; // FBO for our G-buffer pass
+	GLuint deferredBufferColourTex; // albedo goes here
+	GLuint deferredBufferNormalTex; // normals go here
+	GLuint deferredBufferDepthTex; // depth goes here
+
+	GLuint pointLightFBO; // FBO for our lighting pass
+	GLuint lightDiffuseTex; // Store diffuse lighting
+	GLuint lightSpecularTex; // store specular lighting
+
+	Light* pointLights; // Array of lighting data
 };

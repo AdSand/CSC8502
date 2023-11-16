@@ -35,6 +35,19 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 	spaceMoonManager = new MoonManager();
 	spaceRoot->AddChild(spaceMoonManager);
 
+	// generate the lights
+	pointLights = new Light[LIGHT_NUM];
+
+	for (int i = 0; i < LIGHT_NUM; ++i)
+	{
+		Light& l = pointLights[i];
+		l.SetPosition(Vector3(rand() % (int)heightmapSize.x, 150.0f, rand() % (int)heightmapSize.z));
+		l.SetColour(Vector4(0.5f + (float)(rand() / (float)RAND_MAX),
+			0.5f + (float)(rand() / (float)RAND_MAX),
+			0.5f + (float)(rand() / (float)RAND_MAX), 1));
+		l.SetRadius(250.0f + (rand() % 250));
+	}
+
 	SetTextures();
 	SetShaders();
 	SetFBOs();
@@ -151,6 +164,11 @@ void Renderer::RenderScene()
 		// --- Draw the minimap ---
 		ViewMinimap();
 		break;
+	case 3:
+		// --- Deferred shading ---
+		FillBuffers();
+		DrawPointLights();
+		CombineBuffers();
 	}
 }
 
@@ -162,7 +180,6 @@ void Renderer::ViewPlanetScene()
 	currentFrustum.FromMatrix(projMatrix * viewMatrix);
 	BuildNodeLists(root, &currentFrustum, currentCameraF);
 	SortNodeLists();
-
 	DrawShadowScene();
 	viewMatrix = camera->BuildViewMatrix();
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);

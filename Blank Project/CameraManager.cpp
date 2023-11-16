@@ -56,7 +56,7 @@ void Renderer::AutoCameraUpdates()
 void Renderer::ToggleSecondCamera()
 {
 	secondCamera++;
-	if (secondCamera >= 3)
+	if (secondCamera >= 4)
 	{
 		secondCamera = 0;
 	}

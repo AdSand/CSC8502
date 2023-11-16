@@ -53,4 +53,42 @@ void Renderer::SetFBOs()
 	//GL NONE as the parameter to glDrawBuffer - we don’t actually need any colour information for our shadow map pass
 	glDrawBuffer(GL_NONE);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	// ------------------------------------------------------------------------------------------------
+
+	// generate 2 FBOs for first and second passes. Third outputs to back buffer
+	glGenFramebuffers(1, &deferredBufferFBO);
+	glGenFramebuffers(1, &pointLightFBO);
+
+	GLenum buffers[2] = {
+		GL_COLOR_ATTACHMENT0,
+		GL_COLOR_ATTACHMENT1
+	};
+
+	// generate scene depth texture
+	GenerateScreenTexture(deferredBufferDepthTex, true); // true means we are generating a depth or colour texture
+	GenerateScreenTexture(deferredBufferColourTex);
+	GenerateScreenTexture(deferredBufferNormalTex);
+	GenerateScreenTexture(lightDiffuseTex);
+	GenerateScreenTexture(lightSpecularTex);
+
+	// start binding attachments to respective FBOs
+	glBindFramebuffer(GL_FRAMEBUFFER, deferredBufferFBO);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, deferredBufferColourTex, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, deferredBufferNormalTex, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, bufferDepthTex, 0);
+	glDrawBuffers(2, buffers);
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	{
+		return;
+	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, pointLightFBO);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, lightDiffuseTex, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, lightSpecularTex, 0);;
+	glDrawBuffers(2, buffers);
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	{
+		return;
+	}
 }
