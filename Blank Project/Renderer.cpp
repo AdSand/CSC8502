@@ -202,7 +202,7 @@ void Renderer::ViewPlanetScene()
 	DrawNodes();
 	ClearNodeLists();
 
-	if (usePostProcessing)
+	if (usePostProcessing || camera->GetPosition().y <= (heightmapSize.y / 2))
 	{
 		DrawPostProcess();
 	}
