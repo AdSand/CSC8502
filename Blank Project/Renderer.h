@@ -155,14 +155,6 @@ protected:
 		Vector3(880, 230, 1654)
 	};
 
-	// shadows
-	GLuint shadowTex;
-	GLuint shadowFBO;
-
-	Shader* shadowSceneShader;
-	Shader* shadowShader;
-	void DrawShadowScene();
-	void DrawShadowNodes();
 
 	void SetupSpaceScene();
 	SceneNode* spaceRoot;

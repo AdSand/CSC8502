@@ -50,18 +50,6 @@ void Renderer::SetShaders()
 		return;
 	}
 
-	shadowSceneShader = new Shader("shadowSceneVert.glsl", "shadowSceneFrag.glsl");
-	if (!shadowSceneShader->LoadSuccess())
-	{
-		return;
-	}
-
-	shadowShader = new Shader("shadowVert.glsl", "shadowFrag.glsl");
-	if (!shadowSceneShader->LoadSuccess())
-	{
-		return;
-	}
-
 	basicShader = new Shader("TexturedVertex.glsl", "TexturedFragment.glsl");
 	if (!basicShader->LoadSuccess())
 	{

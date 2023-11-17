@@ -105,7 +105,6 @@ Renderer::~Renderer(void)
 	delete roleTanim;
 	delete roleTmaterial;
 
-	glDeleteTextures(1, &shadowTex);
 	glDeleteTextures(1, &bufferDepthTex);
 	glDeleteTextures(2, bufferColourTex);
 	glDeleteTextures(1, &deferredBufferColourTex);
@@ -114,7 +113,6 @@ Renderer::~Renderer(void)
 	glDeleteTextures(1, &lightDiffuseTex);
 	glDeleteTextures(1, &lightSpecularTex);
 
-	glDeleteBuffers(1, &shadowFBO);
 	glDeleteBuffers(1, &bufferFBO);
 	glDeleteBuffers(1, &processFBO);
 	glDeleteBuffers(1, &pointLightFBO);
@@ -188,9 +186,8 @@ void Renderer::ViewPlanetScene()
 	currentFrustum.FromMatrix(projMatrix * viewMatrix);
 	BuildNodeLists(root, currentFrustum, currentCameraF);
 	SortNodeLists();
-	DrawShadowScene();
-	viewMatrix = camera->BuildViewMatrix();
-	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+
+	glViewport(0, 0, width, height);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -232,7 +229,6 @@ void Renderer::ViewSpaceScene()
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, width / 3, height / 3);
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
 	PresentScene();
 }
@@ -246,9 +242,7 @@ void Renderer::ViewMinimap()
 	BuildNodeLists(root, currentFrustum, currentCameraF);
 	SortNodeLists();
 
-	DrawShadowScene();
-	viewMatrix = minimap->BuildViewMatrix();
-	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+	glViewport(0, 0, width, height);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -262,7 +256,6 @@ void Renderer::ViewMinimap()
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, width / 3, height / 3);
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
 	PresentScene();
 }

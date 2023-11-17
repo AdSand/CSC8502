@@ -178,27 +178,6 @@ void Renderer::DrawRoleT()
 	}
 }
 
-void Renderer::DrawShadowScene()
-{
-	glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
-	glClear(GL_DEPTH_BUFFER_BIT);
-
-	glViewport(0, 0, SHADOWSIZE, SHADOWSIZE);
-	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-
-	BindShader(shadowShader);
-
-	viewMatrix = Matrix4::BuildViewMatrix(light->GetPosition(), Vector3(0, 0, 0));
-	projMatrix = Matrix4::Perspective(1, 100, 1, 45);
-	shadowMatrix = projMatrix * viewMatrix; // used later
-
-	heightMap->Draw();
-	DrawShadowNodes();
-
-	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-	glViewport(0, 0, width, height);
-}
-
 void Renderer::SetupSpaceScene()
 {
 	//moonManager->SetModelScale(Vector3(50.0f, 50.0f, 50.f));
