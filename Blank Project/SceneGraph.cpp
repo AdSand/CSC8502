@@ -1,8 +1,8 @@
 #include "Renderer.h"
 
-void Renderer::BuildNodeLists(SceneNode* from, Frustum* currentF, Camera* currentC)
+void Renderer::BuildNodeLists(SceneNode* from, Frustum currentF, Camera* currentC)
 {
-	if (currentF->InsideFrustum(*from))
+	if (currentF.InsideFrustum(*from))
 	{
 		Vector3 dir = from->GetWorldTransform().GetPositionVector() - currentC->GetPosition();
 		from->SetCameraDistance(Vector3::Dot(dir, dir));

@@ -186,7 +186,7 @@ void Renderer::ViewPlanetScene()
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 	currentCameraF = camera;
 	currentFrustum.FromMatrix(projMatrix * viewMatrix);
-	BuildNodeLists(root, &currentFrustum, currentCameraF);
+	BuildNodeLists(root, currentFrustum, currentCameraF);
 	SortNodeLists();
 	DrawShadowScene();
 	viewMatrix = camera->BuildViewMatrix();
@@ -217,7 +217,7 @@ void Renderer::ViewSpaceScene()
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 	currentCameraF = spaceCamera;
 	currentFrustum.FromMatrix(projMatrix * viewMatrix);
-	BuildNodeLists(spaceRoot, &currentFrustum, currentCameraF);
+	BuildNodeLists(spaceRoot, currentFrustum, currentCameraF);
 	SortNodeLists();
 
 	viewMatrix = spaceCamera->BuildViewMatrix();
@@ -243,7 +243,7 @@ void Renderer::ViewMinimap()
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 	currentCameraF = minimap;
 	currentFrustum.FromMatrix(projMatrix * viewMatrix);
-	BuildNodeLists(root, &currentFrustum, currentCameraF);
+	BuildNodeLists(root, currentFrustum, currentCameraF);
 	SortNodeLists();
 
 	DrawShadowScene();

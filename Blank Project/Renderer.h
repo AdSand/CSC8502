@@ -64,7 +64,7 @@ protected:
 	Light* light;
 
 	// Scene graph and management
-	void BuildNodeLists(SceneNode* from, Frustum* currentF, Camera* currentC);
+	void BuildNodeLists(SceneNode* from, Frustum currentF, Camera* currentC);
 	void SortNodeLists();
 	void ClearNodeLists();
 	void DrawNodes();

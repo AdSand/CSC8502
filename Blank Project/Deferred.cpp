@@ -25,7 +25,7 @@ void Renderer::FillBuffers()
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 	currentCameraF = camera;
 	currentFrustum.FromMatrix(projMatrix * viewMatrix);
-	BuildNodeLists(root, &currentFrustum, currentCameraF);
+	BuildNodeLists(root, currentFrustum, currentCameraF);
 	SortNodeLists();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, deferredBufferFBO);
