@@ -83,7 +83,7 @@ void Renderer::SetupPlanetScene()
 		t->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 		t->SetTransform(Matrix4::Translation(treePositions[i]));
 		t->SetModelScale(Vector3(25.0f, 25.0f, 25.f));
-		t->SetBoundingRadius(300.0f);
+		t->SetBoundingRadius(400.0f);
 		t->SetMesh(tree);
 		t->SetTexture(crystalTex);
 		root->AddChild(t);

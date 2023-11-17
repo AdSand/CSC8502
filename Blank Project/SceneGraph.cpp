@@ -105,5 +105,6 @@ void Renderer::DrawShadowNodes()
 		modelMatrix = Matrix4::Translation(treePositions[i]) * Matrix4::Scale(Vector3(100, 100, 100));
 		UpdateShaderMatrices();
 		tree->Draw();
+		
 	}
 }
