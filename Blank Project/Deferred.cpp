@@ -44,9 +44,9 @@ void Renderer::FillBuffers()
 	UpdateShaderMatrices();
 
 	heightMap->Draw();
-	DrawWater();
 	DrawNodes();
 	DrawRoleT();
+	DrawWater();
 	ClearNodeLists();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
