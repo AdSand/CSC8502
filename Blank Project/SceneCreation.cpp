@@ -92,8 +92,8 @@ void Renderer::SetupPlanetScene()
 
 void Renderer::DrawHeightMap()
 {
-	//BindShader(bumpShader);
-	BindShader(shadowSceneShader);
+	BindShader(bumpShader);
+	//BindShader(shadowSceneShader);
 	SetShaderLight(*light);
 
 	glUniform3fv(glGetUniformLocation(bumpShader->GetProgram(), "cameraPos"), 1, (float*)&camera->GetPosition());
@@ -105,10 +105,6 @@ void Renderer::DrawHeightMap()
 	glUniform1i(glGetUniformLocation(bumpShader->GetProgram(), "bumpTex"), 1);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, planetBump);
-
-	glUniform1i(glGetUniformLocation(sceneShader->GetProgram(), "shadowTex"), 2);
-	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, shadowTex);
 
 	//reset the model and texture matrices back to identity - the water shader will be
 	// modifying these matrices later, and we don’t want this change to affect the heightmap
