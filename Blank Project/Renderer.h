@@ -10,7 +10,6 @@
 #include "MoonManager.h"
 #include "CrystalCube.h"
 
-#define SHADOWSIZE 2048
 const int LIGHT_NUM = 100;
 
 class Renderer : public OGLRenderer	{
