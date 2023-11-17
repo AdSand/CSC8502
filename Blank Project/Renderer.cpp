@@ -197,9 +197,9 @@ void Renderer::ViewPlanetScene()
 
 	DrawSkybox();
 	DrawHeightMap();
-	DrawWater();
 	DrawRoleT();
 	DrawNodes();
+	DrawWater();
 	ClearNodeLists();
 
 	if (usePostProcessing || camera->GetPosition().y <= (heightmapSize.y / 2))
