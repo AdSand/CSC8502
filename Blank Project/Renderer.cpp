@@ -255,9 +255,9 @@ void Renderer::ViewMinimap()
 
 	DrawSkybox();
 	DrawHeightMap();
-	DrawWater();
 	DrawNodes();
 	DrawRoleT();
+	DrawWater();
 	ClearNodeLists();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
