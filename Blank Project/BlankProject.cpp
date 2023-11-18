@@ -40,6 +40,11 @@ int main()	{
 			renderer.ToggleSecondCamera();
 		}
 
+		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_G))
+		{
+			renderer.ToggleGreyscale();
+		}
+
 		if (Window::GetKeyboard()->KeyTriggered(KEYBOARD_I))
 		{
 			renderer.GetCameraInfo();

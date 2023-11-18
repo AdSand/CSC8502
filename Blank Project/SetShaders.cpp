@@ -50,6 +50,12 @@ void Renderer::SetShaders()
 		return;
 	}
 
+	greyscaleShader = new Shader("TexturedVertex.glsl", "greyscaleFrag.glsl");
+	if (!greyscaleShader->LoadSuccess())
+	{
+		return;
+	}
+
 	basicShader = new Shader("TexturedVertex.glsl", "TexturedFragment.glsl");
 	if (!basicShader->LoadSuccess())
 	{

@@ -35,7 +35,14 @@ void Renderer::DrawPostProcess()
 
 void Renderer::PresentScene()
 {
-	BindShader(sceneShader);
+	if (useGreyscale)
+	{
+		BindShader(greyscaleShader);
+	}
+	else
+	{
+		BindShader(sceneShader);
+	}
 	modelMatrix.ToIdentity();
 	viewMatrix.ToIdentity();
 	projMatrix.ToIdentity();

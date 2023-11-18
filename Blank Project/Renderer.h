@@ -22,6 +22,7 @@ public:
 	 void ToggleCamera();
 	 void TogglePostProcessing();
 	 void ToggleSecondCamera();
+	 void ToggleGreyscale();
 	 void GetCameraInfo();
 	 void AutoCameraUpdates();
 protected:
@@ -76,6 +77,8 @@ protected:
 
 	Frustum currentFrustum;
 	Camera* currentCameraF;
+
+	bool useGreyscale = false;
 	
 
 	// shaders
@@ -87,6 +90,7 @@ protected:
 	Shader* processShader;
 	Shader* sceneShader;
 	Shader* basicShader;
+	Shader* greyscaleShader;
 
 	// Setup the project
 	void SetFBOs();

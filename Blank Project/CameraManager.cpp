@@ -63,3 +63,8 @@ void Renderer::ToggleSecondCamera()
 		secondCamera = 0;
 	}
 }
+
+void Renderer::ToggleGreyscale()
+{
+	useGreyscale = useGreyscale ? false : true;
+}
