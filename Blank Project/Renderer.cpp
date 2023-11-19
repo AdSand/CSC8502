@@ -238,7 +238,11 @@ void Renderer::ViewSpaceScene()
 void Renderer::ViewMinimap()
 {
 	viewMatrix = minimap->BuildViewMatrix();
-	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
+	projMatrix = Matrix4::Orthographic(1.0f, 15000.0f, 
+		(width / static_cast<float>(2)), 
+		-(width / static_cast<float>(2)),
+		(height / static_cast<float>(2)),
+		-(height / static_cast<float>(2)));
 	currentCameraF = minimap;
 	currentFrustum.FromMatrix(projMatrix * viewMatrix);
 	BuildNodeLists(root, currentFrustum, currentCameraF);
