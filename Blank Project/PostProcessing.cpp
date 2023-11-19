@@ -49,7 +49,7 @@ void Renderer::PresentScene()
 	UpdateShaderMatrices();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, bufferColourTex[0]);
-	glUniform1i(glGetUniformLocation(sceneShader->GetProgram(), " diffuseTex "), 0);
+	glUniform1i(glGetUniformLocation(sceneShader->GetProgram(), "diffuseTex"), 0);
 	quad->Draw();
 }
 
