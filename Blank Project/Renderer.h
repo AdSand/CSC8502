@@ -142,6 +142,8 @@ protected:
 	float frameTime;
 	float walkForwardTimer = 0;
 
+	Vector3 roleTposition;
+
 	// water
 	float waterRotate;
 	float waterCycle;

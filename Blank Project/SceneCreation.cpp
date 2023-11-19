@@ -97,7 +97,7 @@ void Renderer::DrawHeightMap()
 	//BindShader(shadowSceneShader);
 	SetShaderLight(*light);
 
-	glUniform3fv(glGetUniformLocation(bumpShader->GetProgram(), "cameraPos"), 1, (float*)&camera->GetPosition());
+	glUniform3fv(glGetUniformLocation(bumpShader->GetProgram(), "cameraPos"), 1, (float*)&currentCameraF->GetPosition());
 
 	glUniform1i(glGetUniformLocation(bumpShader->GetProgram(), "diffuseTex"), 0);
 	glActiveTexture(GL_TEXTURE0);
@@ -153,7 +153,7 @@ void Renderer::DrawRoleT()
 {
 	BindShader(animShader);
 	glUniform1i(glGetUniformLocation(animShader->GetProgram(), "diffuseTex"), 0);
-	modelMatrix = Matrix4::Translation(Vector3(650 + (walkForwardTimer * 40), 230, 2100)) *
+	modelMatrix = Matrix4::Translation(roleTposition) *
 		Matrix4::Scale(Vector3(50, 50, 50)) * 
 		Matrix4::Rotation(90, Vector3(0, 1, 0));
 	UpdateShaderMatrices();

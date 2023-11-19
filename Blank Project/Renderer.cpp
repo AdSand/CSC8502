@@ -139,6 +139,7 @@ void Renderer::UpdateScene(float dt)
 	waterCycle += dt * 0.005f;
 	frameTime -= dt;
 	walkForwardTimer += dt;
+	roleTposition = Vector3(650 + (walkForwardTimer * 40), 230, 2100);
 	if (walkForwardTimer > 30.0f)
 	{
 		walkForwardTimer = 0;
@@ -150,6 +151,7 @@ void Renderer::UpdateScene(float dt)
 	}
 	root->Update(dt);
 	spaceRoot->Update(dt);
+	minimap->SetPosition(Vector3(roleTposition.x, 1400, roleTposition.z));
 }
 
 void Renderer::RenderScene()
