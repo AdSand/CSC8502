@@ -6,4 +6,3 @@ class CrystalCube : public SceneNode
 public:
 	void Update(float dt) override;
 };
-

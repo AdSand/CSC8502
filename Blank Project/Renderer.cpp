@@ -265,4 +265,3 @@ void Renderer::ViewMinimap()
 	glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
 	PresentScene();
 }
-

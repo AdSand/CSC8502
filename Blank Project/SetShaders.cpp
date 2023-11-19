@@ -66,7 +66,6 @@ void Renderer::SetShaders()
 	pointLightShader = new Shader("pointLightVert.glsl", "pointLightFrag.glsl");
 	combineShader = new Shader("combineVert.glsl", "combineFrag.glsl");
 
-	// check all deferred rendering shaders at once
 	if (!deferredSceneShader->LoadSuccess() || !pointLightShader->LoadSuccess() || !combineShader->LoadSuccess())
 	{
 		return;

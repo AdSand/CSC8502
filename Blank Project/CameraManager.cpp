@@ -1,6 +1,5 @@
 #include "Renderer.h"
 
-
 void Renderer::ToggleCamera()
 {
 	cameraUnlocked = cameraUnlocked ? false : true;

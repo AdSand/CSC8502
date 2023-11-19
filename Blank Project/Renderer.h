@@ -21,8 +21,9 @@ public:
 
 	 void ToggleCamera();
 	 void TogglePostProcessing();
-	 void ToggleSecondCamera();
 	 void ToggleGreyscale();
+
+	 void ToggleSecondCamera();
 	 void GetCameraInfo();
 	 void AutoCameraUpdates();
 protected:
@@ -59,9 +60,6 @@ protected:
 	int currentCam = 0;
 	int currentPitchYaw = 0;
 
-	HeightMap* heightMap;
-	Vector3 heightmapSize;
-	Light* light;
 
 	// Scene graph and management
 	void BuildNodeLists(SceneNode* from, Frustum currentF, Camera* currentC);
@@ -77,10 +75,7 @@ protected:
 
 	Frustum currentFrustum;
 	Camera* currentCameraF;
-
-	bool useGreyscale = false;
 	
-
 	// shaders
 	Shader* lightShader;
 	Shader* reflectShader; // reflect for water
@@ -93,6 +88,9 @@ protected:
 	Shader* greyscaleShader;
 
 	// Setup the project
+	HeightMap* heightMap;
+	Vector3 heightmapSize;
+	Light* light;
 	void SetFBOs();
 	void SetShaders();
 
@@ -202,4 +200,6 @@ protected:
 	GLuint lightSpecularTex; // store specular lighting
 
 	Light* pointLights; // Array of lighting data
+
+	bool useGreyscale = false;
 };

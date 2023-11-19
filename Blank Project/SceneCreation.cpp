@@ -67,15 +67,6 @@ void Renderer::SetupPlanetScene()
 	c->SetTexture(crystalTex);
 	root->AddChild(c);
 
-	//SceneNode* p = new SceneNode();
-	//p->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-	//p->SetTransform(Matrix4::Translation(Vector3(2800, 180, 2800)));
-	//p->SetModelScale(Vector3(1000.0f, 10.0f, 1000.f));
-	//p->SetBoundingRadius(800.0f);
-	//p->SetMesh(sphere);
-	//p->SetTexture(crystalTex);
-	//root->AddChild(p);
-
 	// create the trees
 	for (int i = 0; i < 23; i++)
 	{
@@ -94,7 +85,6 @@ void Renderer::SetupPlanetScene()
 void Renderer::DrawHeightMap()
 {
 	BindShader(bumpShader);
-	//BindShader(shadowSceneShader);
 	SetShaderLight(*light);
 
 	glUniform3fv(glGetUniformLocation(bumpShader->GetProgram(), "cameraPos"), 1, (float*)&currentCameraF->GetPosition());
@@ -107,12 +97,8 @@ void Renderer::DrawHeightMap()
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, planetBump);
 
-	//reset the model and texture matrices back to identity - the water shader will be
-	// modifying these matrices later, and we don’t want this change to affect the heightmap
-
 	modelMatrix.ToIdentity();
 	textureMatrix.ToIdentity();
-
 	UpdateShaderMatrices();
 	heightMap->Draw();
 }
@@ -182,9 +168,6 @@ void Renderer::DrawRoleT()
 
 void Renderer::SetupSpaceScene()
 {
-	//moonManager->SetModelScale(Vector3(50.0f, 50.0f, 50.f));
-	//moonManager->SetBoundingRadius(50.0f);
-	//moonManager->SetMesh(sphere);
 	spaceMoonManager->SetTransform(Matrix4::Translation(heightmapSize * Vector3(0.5f, 5.0f, 0.5f)));
 
 	// create the moons

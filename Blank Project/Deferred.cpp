@@ -94,11 +94,8 @@ void Renderer::DrawPointLights()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glCullFace(GL_BACK);
 	glDepthFunc(GL_LEQUAL);
-
 	glDepthMask(GL_TRUE);
-
 	glClearColor(0.2f, 0.2f, 0.2f, 1);
-
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
@@ -126,6 +123,5 @@ void Renderer::CombineBuffers()
 	glViewport(0, 0, width / 2, height / 2);
 	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glClear(GL_DEPTH_BUFFER_BIT); // don't clear the colour this time.
-
 	quad->Draw();
 }
