@@ -9,3 +9,8 @@ https://textures.pixel-furnace.com/texture?name=Mossy%20Rock
 https://textures.pixel-furnace.com/texture?name=Rock%2004
 
 https://tools.wwwtyro.net/space-3d/index.html#animationSpeed=1&fov=75.43504464834814&nebulae=true&pointStars=true&resolution=1024&seed=6rmkiduygiw0&stars=true&sun=true
+
+
+Mesh credits:
+
+https://assetstore.unity.com/packages/3d/vegetation/trees/dry-trees-86967
