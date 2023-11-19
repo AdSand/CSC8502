@@ -102,7 +102,7 @@ protected:
 	void DrawHeightMap();
 	void DrawRoleT();
 	void SetupPlanetScene();
-	void DrawWater();
+	void DrawWater(float transparency);
 	void PresentScene();
 	void DrawPostProcess();
 

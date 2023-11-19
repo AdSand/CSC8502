@@ -46,7 +46,7 @@ void Renderer::FillBuffers()
 	heightMap->Draw();
 	DrawNodes();
 	DrawRoleT();
-	DrawWater();
+	DrawWater(0.5f);
 	ClearNodeLists();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);

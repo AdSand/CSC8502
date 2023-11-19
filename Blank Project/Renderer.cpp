@@ -196,7 +196,7 @@ void Renderer::ViewPlanetScene()
 	DrawHeightMap();
 	DrawRoleT();
 	DrawNodes();
-	DrawWater();
+	DrawWater(0.5f);
 	ClearNodeLists();
 
 	if (usePostProcessing || camera->GetPosition().y <= (heightmapSize.y / 2))
@@ -221,7 +221,7 @@ void Renderer::ViewSpaceScene()
 	projMatrix = Matrix4::Perspective(1.0f, 15000.0f, (float)width / (float)height, 45.0f);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
-	glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	DrawSkybox();
 	DrawNodes();
@@ -251,7 +251,7 @@ void Renderer::ViewMinimap()
 	DrawHeightMap();
 	DrawNodes();
 	DrawRoleT();
-	DrawWater();
+	DrawWater(1.0f);
 	ClearNodeLists();
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);

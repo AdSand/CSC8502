@@ -117,13 +117,14 @@ void Renderer::DrawHeightMap()
 	heightMap->Draw();
 }
 
-void Renderer::DrawWater()
+void Renderer::DrawWater(float transparency)
 {
 	BindShader(reflectShader);
 
 	glUniform3fv(glGetUniformLocation(reflectShader->GetProgram(), "cameraPos"), 1, (float*)&currentCameraF->GetPosition());
 	glUniform1i(glGetUniformLocation(reflectShader->GetProgram(), "diffuseTex"), 0);
 	glUniform1i(glGetUniformLocation(reflectShader->GetProgram(), "cubeTex"), 2);
+	glUniform1f(glGetUniformLocation(reflectShader->GetProgram(), "transparency"), transparency);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, waterTex);
