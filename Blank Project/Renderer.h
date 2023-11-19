@@ -147,7 +147,7 @@ protected:
 	float waterCycle;
 
 	// trees
-	Vector3 treePositions[7] =
+	Vector3 treePositions[23] =
 	{
 		Vector3(2382, 230, 703),
 		Vector3(2979, 230, 1540),
@@ -155,6 +155,22 @@ protected:
 		Vector3(1498, 230, 2758),
 		Vector3(438, 230, 3197),
 		Vector3(1057, 230, 605),
+		Vector3(1715, 230, 764),
+		Vector3(3415, 230, 1018),
+		Vector3(3857, 230, 1815),
+		Vector3(3745, 230, 3539),
+		Vector3(3513, 230, 3963),
+		Vector3(2773, 230, 3914),
+		Vector3(1668, 230, 3457),
+		Vector3(433, 230, 3745),
+		Vector3(168, 230, 1879),
+		Vector3(238, 230, 923),
+		Vector3(2231, 230, 209),
+		Vector3(3860, 230, 238),
+		Vector3(3047, 230, 617),
+		Vector3(2494, 230, 1488),
+		Vector3(869, 230, 2484),
+		Vector3(148, 230, 2831),
 		Vector3(880, 230, 1654)
 	};
 

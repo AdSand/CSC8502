@@ -77,13 +77,14 @@ void Renderer::SetupPlanetScene()
 	//root->AddChild(p);
 
 	// create the trees
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 23; i++)
 	{
 		SceneNode* t = new SceneNode();
 		t->SetColour(Vector4(1.0f, 1.0f, 1.0f, 1.0f));
-		t->SetTransform(Matrix4::Translation(treePositions[i]));
-		t->SetModelScale(Vector3(25.0f, 25.0f, 25.f));
-		t->SetBoundingRadius(400.0f);
+		t->SetTransform(Matrix4::Translation(treePositions[i]) * Matrix4::Rotation((rand() % 360), Vector3(0, 1, 0)));
+		float randomScale = 20 + (rand() % 30);
+		t->SetModelScale(Vector3(randomScale, randomScale, randomScale));
+		t->SetBoundingRadius(500.0f);
 		t->SetMesh(tree);
 		t->SetTexture(crystalTex);
 		root->AddChild(t);
