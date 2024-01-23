@@ -2,8 +2,8 @@
 #include "Renderer.h"
 
 int main()	{
-	Window w("My planet!", 1920, 1200, true);
-	//Window w("Make your own project!", 1280, 720, false);
+	//Window w("My planet!", 1920, 1200, true);
+	Window w("Make your own project!", 1280, 720, false);
 
 	if(!w.HasInitialised()) {
 		return -1;
