@@ -62,6 +62,12 @@ void Renderer::SetShaders()
 		return;
 	}
 
+	particleShader = new Shader("particleVertex.glsl", "particleFragment.glsl");
+	if (!particleShader->LoadSuccess())
+	{
+		return;
+	}
+
 	deferredSceneShader = new Shader("bumpVertex.glsl", "bufferFragment.glsl");
 	pointLightShader = new Shader("pointLightVert.glsl", "pointLightFrag.glsl");
 	combineShader = new Shader("combineVert.glsl", "combineFrag.glsl");

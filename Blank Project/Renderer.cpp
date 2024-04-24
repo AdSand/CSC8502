@@ -95,6 +95,7 @@ Renderer::~Renderer(void)
 	delete deferredSceneShader;
 	delete pointLightShader;
 	delete combineShader;
+	delete particleShader;
 
 	delete quad;
 	delete sphere;

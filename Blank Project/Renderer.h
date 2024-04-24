@@ -86,6 +86,7 @@ protected:
 	Shader* sceneShader;
 	Shader* basicShader;
 	Shader* greyscaleShader;
+	Shader* particleShader;
 
 	// Setup the project
 	HeightMap* heightMap;
