@@ -9,6 +9,7 @@
 #include "../nclgl/MeshMaterial.h"
 #include "MoonManager.h"
 #include "CrystalCube.h"
+#include "ParticleSystem.h"
 
 const int LIGHT_NUM = 100;
 
@@ -102,6 +103,7 @@ protected:
 	void DrawRoleT();
 	void SetupPlanetScene();
 	void DrawWater(float transparency);
+	void DrawParticles();
 	void PresentScene();
 	void DrawPostProcess();
 
@@ -174,6 +176,13 @@ protected:
 		Vector3(148, 230, 2831),
 		Vector3(880, 230, 1654)
 	};
+
+	// particles
+	vector<ParticleSystem*> particleSystems;
+	void SetupParticleSystems();
+	void UpdateParticleSystems(float dt);
+
+	ParticleSystem* testParticles;
 
 
 	void SetupSpaceScene();

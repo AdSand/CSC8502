@@ -141,6 +141,7 @@
     <ClCompile Include="CrystalCube.cpp" />
     <ClCompile Include="Deferred.cpp" />
     <ClCompile Include="MoonManager.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="PostProcessing.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SceneCreation.cpp" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="CrystalCube.h" />
     <ClInclude Include="MoonManager.h" />
+    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

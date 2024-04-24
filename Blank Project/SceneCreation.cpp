@@ -135,6 +135,19 @@ void Renderer::DrawWater(float transparency)
 	textureMatrix.ToIdentity();
 }
 
+void Renderer::DrawParticles()
+{
+	BindShader(particleShader);
+
+	UpdateShaderMatrices();
+
+	for (auto& ps : particleSystems)
+	{
+		glBindTexture(GL_TEXTURE_2D, ps->GetTexture());
+		ps->DrawParticles();
+	}
+}
+
 void Renderer::DrawRoleT()
 {
 	BindShader(animShader);
@@ -163,6 +176,21 @@ void Renderer::DrawRoleT()
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, roleTmatTextures[i]);
 		roleTmesh->DrawSubMesh(i);
+	}
+}
+
+void Renderer::SetupParticleSystems()
+{
+	testParticles = new ParticleSystem({0, 50, 0}, {0, 0, 0}, {3000, 1, 3000}, 50, 70.0f, 15, 15.25f, 0.25f, moonTex);
+	particleSystems.push_back(testParticles);
+}
+
+void Renderer::UpdateParticleSystems(float dt)
+{
+	for (auto& ps : particleSystems)
+	{
+		ps->CreateNewParticles(dt);
+		ps->UpdateParticles(dt, camera->GetPosition());
 	}
 }
 

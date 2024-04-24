@@ -53,6 +53,7 @@ Renderer::Renderer(Window &parent) : OGLRenderer(parent)
 	SetFBOs();
 	SetupPlanetScene();
 	SetupSpaceScene();
+	SetupParticleSystems();
 
 	camera = new Camera(-45.0f, 0.0f, heightmapSize * Vector3(0.5f, 5.0f, 0.5f));
 	minimap = new Camera(-90, 180, Vector3(heightmapSize.x / 2, 5000, heightmapSize.z / 2));
@@ -106,6 +107,12 @@ Renderer::~Renderer(void)
 	delete roleTanim;
 	delete roleTmaterial;
 
+	for (auto ps : particleSystems)
+	{
+		delete ps;
+	}
+	particleSystems.clear();
+
 	glDeleteTextures(1, &bufferDepthTex);
 	glDeleteTextures(2, bufferColourTex);
 	glDeleteTextures(1, &deferredBufferColourTex);
@@ -135,6 +142,8 @@ void Renderer::UpdateScene(float dt)
 	{
 		AutoCameraUpdates();
 	}
+
+	UpdateParticleSystems(dt);
 
 	waterRotate += dt * 2.0f;
 	waterCycle += dt * 0.005f;
@@ -199,7 +208,9 @@ void Renderer::ViewPlanetScene()
 	DrawHeightMap();
 	DrawRoleT();
 	DrawNodes();
+	DrawParticles();
 	DrawWater(0.5f);
+	
 	ClearNodeLists();
 
 	if (usePostProcessing || camera->GetPosition().y <= (heightmapSize.y / 2))
