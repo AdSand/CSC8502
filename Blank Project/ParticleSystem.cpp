@@ -56,7 +56,7 @@ void ParticleSystem::UpdateParticles(float dt, Vector3 cameraPos)
         Particle& p = particles[i];
         if (p.life > 0.0f) {
             p.life -= dt;
-            p.pos += p.speed * dt;
+            p.pos -= p.speed * dt;
             p.cameraDistance = Vector3(p.pos - cameraPos).Length();
 
             positionData[4 * particlesCount] = p.pos.x;

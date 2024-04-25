@@ -125,6 +125,7 @@ protected:
 	GLuint waterTex;
 	GLuint moonTex;
 	GLuint crystalTex;
+	GLuint rainTex;
 
 	// meshes
 	Mesh* quad;
@@ -182,7 +183,7 @@ protected:
 	void SetupParticleSystems();
 	void UpdateParticleSystems(float dt);
 
-	ParticleSystem* testParticles;
+	ParticleSystem* rainParticles;
 
 
 	void SetupSpaceScene();

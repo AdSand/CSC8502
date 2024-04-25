@@ -13,6 +13,7 @@ void Renderer::SetTextures()
 	waterTex = SOIL_load_OGL_texture(TEXTUREDIR"water.TGA", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 	moonTex = SOIL_load_OGL_texture(TEXTUREDIR"Rock_04_DIFF.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
 	crystalTex = SOIL_load_OGL_texture(TEXTUREDIR"crystal.TGA", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
+	rainTex = SOIL_load_OGL_texture(TEXTUREDIR"rain.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
 
 	SetTextureRepeating(planetTex, true);
 	SetTextureRepeating(planetBump, true);
@@ -20,7 +21,7 @@ void Renderer::SetTextures()
 	SetTextureRepeating(moonTex, true);
 	SetTextureRepeating(crystalTex, true);
 
-	if (!planetTex || !planetBump || !waterTex || !moonTex || !crystalTex)
+	if (!planetTex || !planetBump || !waterTex || !moonTex || !crystalTex || !rainTex)
 	{
 		return;
 	}
@@ -181,8 +182,8 @@ void Renderer::DrawRoleT()
 
 void Renderer::SetupParticleSystems()
 {
-	testParticles = new ParticleSystem({0, 50, 0}, {0, 0, 0}, {3000, 1, 3000}, 50, 70.0f, 15, 15.25f, 0.25f, moonTex);
-	particleSystems.push_back(testParticles);
+	rainParticles = new ParticleSystem({0, 1500, 0}, {0, 0, 0}, {3000, 1, 3000}, 20, 500.0f, 3, 35.25f, 0.25f, rainTex);
+	particleSystems.push_back(rainParticles);
 }
 
 void Renderer::UpdateParticleSystems(float dt)
