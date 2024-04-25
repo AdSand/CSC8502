@@ -144,6 +144,7 @@ void Renderer::DrawParticles()
 
 	for (auto& ps : particleSystems)
 	{
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, ps->GetTexture());
 		ps->DrawParticles();
 	}

@@ -204,10 +204,10 @@ void Renderer::ViewPlanetScene()
 	glBindFramebuffer(GL_FRAMEBUFFER, bufferFBO);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-	DrawSkybox();
+	//DrawSkybox();
 	DrawHeightMap();
-	DrawRoleT();
-	DrawNodes();
+	//DrawRoleT();
+	//DrawNodes();
 	DrawParticles();
 	DrawWater(0.5f);
 	
