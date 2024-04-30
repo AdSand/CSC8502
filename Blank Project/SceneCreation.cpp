@@ -183,7 +183,7 @@ void Renderer::DrawRoleT()
 
 void Renderer::SetupParticleSystems()
 {
-	rainParticles = new ParticleSystem({0, 1500, 0}, {0, 0, 0}, {3000, 1, 3000}, 20, 500.0f, 3, 35.25f, 0.25f, rainTex);
+	rainParticles = new ParticleSystem({0, 1500, 0}, {0, 0, 0}, {3000, 1, 3000}, 20, 500.0f, 3, 55.25f, 0.25f, rainTex);
 	particleSystems.push_back(rainParticles);
 }
 
