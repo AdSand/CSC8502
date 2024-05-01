@@ -126,6 +126,7 @@ protected:
 	GLuint moonTex;
 	GLuint crystalTex;
 	GLuint rainTex;
+	GLuint snowTex;
 
 	// meshes
 	Mesh* quad;
@@ -184,6 +185,7 @@ protected:
 	void UpdateParticleSystems(float dt);
 
 	ParticleSystem* rainParticles;
+	ParticleSystem* snowParticles;
 
 
 	void SetupSpaceScene();
