@@ -20,6 +20,7 @@ void Renderer::SetTextures()
 	SetTextureRepeating(waterTex, true);
 	SetTextureRepeating(moonTex, true);
 	SetTextureRepeating(crystalTex, true);
+	SetTextureRepeating(rainTex, true);
 
 	if (!planetTex || !planetBump || !waterTex || !moonTex || !crystalTex || !rainTex)
 	{
@@ -183,7 +184,7 @@ void Renderer::DrawRoleT()
 
 void Renderer::SetupParticleSystems()
 {
-	rainParticles = new ParticleSystem({0, 1500, 0}, {0, 0, 0}, {3000, 1, 3000}, 20, 500.0f, 3, 55.25f, 0.25f, rainTex);
+	rainParticles = new ParticleSystem({0, 1500, 0}, {0, 0, 0}, {3000, 1, 3000}, 20, 750.0f, 2, 17.25f, 0.25f, rainTex);
 	particleSystems.push_back(rainParticles);
 }
 
