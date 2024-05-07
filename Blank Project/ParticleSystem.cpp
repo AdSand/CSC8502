@@ -1,6 +1,6 @@
 #include "ParticleSystem.h"
 
-ParticleSystem::ParticleSystem(Vector3 startPos, Vector3 rngLower, Vector3 rngHigher, int particlesPerBurst, float particleSpeed, float lifeSpan, float particleSize, float timeBetween, GLuint texture)
+ParticleSystem::ParticleSystem(Vector3 startPos, Vector3 rngLower, Vector3 rngHigher, int particlesPerBurst, float particleSpeed, float lifeSpan, float particleSize, float timeBetween, GLuint texture, Type type)
 {
     lastUsedParticle = 0;
     this->texture = texture;
@@ -12,6 +12,7 @@ ParticleSystem::ParticleSystem(Vector3 startPos, Vector3 rngLower, Vector3 rngHi
     this->rngLowerBound = rngLower;
     this->rngRange = Vector3(rngHigher.x - rngLower.x, rngHigher.y - rngLower.y, rngHigher.z - rngLower.z);
     this->timeBetween = timeBetween;
+    this->type = type;
 
     glGenVertexArrays(1, &particleVAO);
     glBindVertexArray(particleVAO);
@@ -48,16 +49,34 @@ ParticleSystem::~ParticleSystem()
     glDeleteVertexArrays(1, &particleVAO);
 }
 
-void ParticleSystem::UpdateParticles(float dt, Vector3 cameraPos)
+void ParticleSystem::UpdateParticles(float dt, Vector3 cameraPosition)
 {
     particlesCount = 0;
 
+    switch (type)
+    {
+    case rain:
+        UpdateRain(dt, cameraPosition);
+        break;
+    case snow:
+        UpdateSnow(dt, cameraPosition);
+        break;
+    default:
+        std::cerr << "No particle type set";
+        break;
+    }
+
+    SortParticles();
+}
+
+void ParticleSystem::UpdateSnow(float dt, Vector3 cameraPosition)
+{
     for (int i = 0; i < MAX_PARTICLES; i++) {
         Particle& p = particles[i];
         if (p.life > 0.0f) {
             p.life -= dt;
             p.pos -= p.speed * dt;
-            p.cameraDistance = Vector3(p.pos - cameraPos).Length();
+            p.cameraDistance = Vector3(p.pos - cameraPosition).Length();
 
             positionData[4 * particlesCount] = p.pos.x;
             positionData[4 * particlesCount + 1] = p.pos.y;
@@ -74,7 +93,32 @@ void ParticleSystem::UpdateParticles(float dt, Vector3 cameraPos)
         }
         particlesCount++;
     }
-    SortParticles();
+}
+
+void ParticleSystem::UpdateRain(float dt, Vector3 cameraPosition)
+{
+    for (int i = 0; i < MAX_PARTICLES; i++) {
+        Particle& p = particles[i];
+        if (p.life > 0.0f) {
+            p.life -= dt;
+            p.pos -= p.speed * dt;
+            p.cameraDistance = Vector3(p.pos - cameraPosition).Length();
+
+            positionData[4 * particlesCount] = p.pos.x;
+            positionData[4 * particlesCount + 1] = p.pos.y;
+            positionData[4 * particlesCount + 2] = p.pos.z;
+            positionData[4 * particlesCount + 3] = p.size;
+
+        }
+        else {
+            p.cameraDistance = -1.0f;
+            positionData[4 * particlesCount] = -1000;
+            positionData[4 * particlesCount + 1] = -1000;
+            positionData[4 * particlesCount + 2] = -1000;
+            positionData[4 * particlesCount + 3] = p.size;
+        }
+        particlesCount++;
+    }
 }
 
 void ParticleSystem::CreateNewParticles(float dt)

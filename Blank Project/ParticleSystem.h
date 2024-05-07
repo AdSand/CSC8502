@@ -11,6 +11,7 @@
 // This particle system code is based on the implementation found at:
 // https://www.opengl-tutorial.org/intermediate-tutorials/billboards-particles/particles-instancing/
 
+enum Type { rain, snow };
 
 struct Particle {
     Vector3 pos;
@@ -18,6 +19,7 @@ struct Particle {
     float size;
     float life;
     float cameraDistance;
+    Type type;
 
     bool operator<(const Particle& other)const {
         return this->cameraDistance > other.cameraDistance;
@@ -29,10 +31,12 @@ class ParticleSystem
 {
 public:
     ParticleSystem(Vector3 startPos, Vector3 rngLower, Vector3 rngHigher, int particlesPerBurst,
-        float particleSpeed, float lifeSpan, float particleSize, float timeBetween, GLuint texture);
+        float particleSpeed, float lifeSpan, float particleSize, float timeBetween, GLuint texture, Type type);
     ~ParticleSystem();
 
     void UpdateParticles(float dt, Vector3 cameraPosition);
+    void UpdateSnow(float dt, Vector3 cameraPosition);
+    void UpdateRain(float dt, Vector3 cameraPosition);
     void CreateNewParticles(float dt);
     void DrawParticles();
     GLuint GetTexture() { return texture; }
@@ -62,6 +66,8 @@ protected:
     float particleSize;
 
     float timeBetween = 1.0f;
+
+    Type type;
 
     float particleTimer = 0;
 
