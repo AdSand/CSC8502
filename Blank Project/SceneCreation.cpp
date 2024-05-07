@@ -15,6 +15,7 @@ void Renderer::SetTextures()
 	crystalTex = SOIL_load_OGL_texture(TEXTUREDIR"crystal.TGA", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
 	rainTex = SOIL_load_OGL_texture(TEXTUREDIR"rain.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
 	snowTex = SOIL_load_OGL_texture(TEXTUREDIR"snowflake.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
+	sandTex = SOIL_load_OGL_texture(TEXTUREDIR"sand.png", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, 0);
 
 	SetTextureRepeating(planetTex, true);
 	SetTextureRepeating(planetBump, true);
@@ -23,6 +24,7 @@ void Renderer::SetTextures()
 	SetTextureRepeating(crystalTex, true);
 	SetTextureRepeating(rainTex, true);
 	SetTextureRepeating(snowTex, true);
+	SetTextureRepeating(sandTex, true);
 
 	if (!planetTex || !planetBump || !waterTex || !moonTex || !crystalTex || !rainTex)
 	{
@@ -189,8 +191,11 @@ void Renderer::SetupParticleSystems()
 	//rainParticles = new ParticleSystem({0, 1500, 0}, {0, 0, 0}, {3000, 1, 3000}, 20, 750.0f, 2, 13.25f, 0.15f, rainTex, rain);
 	//particleSystems.push_back(rainParticles);
 
-	snowParticles = new ParticleSystem({ 0, 1500, 0 }, { 0, 0, 0 }, { 3000, 1, 3000 }, 20, 300.0f, 4, 12.25f, 0.25f, snowTex, snow);
-	particleSystems.push_back(snowParticles);
+	//snowParticles = new ParticleSystem({ 0, 1500, 0 }, { 0, 0, 0 }, { 3000, 1, 3000 }, 20, 300.0f, 4, 12.25f, 0.25f, snowTex, snow);
+	//particleSystems.push_back(snowParticles);
+
+	sandParticles = new ParticleSystem({ 0, 1500, 0 }, { 0, 0, 0 }, { 3000, 1, 3000 }, 35, 300.0f, 4, 6.25f, 0.15f, sandTex, sand);
+	particleSystems.push_back(sandParticles);
 }
 
 void Renderer::UpdateParticleSystems(float dt)

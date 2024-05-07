@@ -11,7 +11,7 @@
 // This particle system code is based on the implementation found at:
 // https://www.opengl-tutorial.org/intermediate-tutorials/billboards-particles/particles-instancing/
 
-enum Type { rain, snow };
+enum Type { rain, snow, sand };
 
 struct Particle {
     Vector3 pos;
@@ -37,6 +37,7 @@ public:
     void UpdateParticles(float dt, Vector3 cameraPosition);
     void UpdateSnow(float dt, Vector3 cameraPosition);
     void UpdateRain(float dt, Vector3 cameraPosition);
+    void UpdateSand(float dt, Vector3 cameraPosition);
     void CreateNewParticles(float dt);
     void DrawParticles();
     GLuint GetTexture() { return texture; }

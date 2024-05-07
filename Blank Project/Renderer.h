@@ -127,6 +127,7 @@ protected:
 	GLuint crystalTex;
 	GLuint rainTex;
 	GLuint snowTex;
+	GLuint sandTex;
 
 	// meshes
 	Mesh* quad;
@@ -186,6 +187,7 @@ protected:
 
 	ParticleSystem* rainParticles;
 	ParticleSystem* snowParticles;
+	ParticleSystem* sandParticles;
 
 
 	void SetupSpaceScene();

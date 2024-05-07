@@ -61,6 +61,8 @@ void ParticleSystem::UpdateParticles(float dt, Vector3 cameraPosition)
     case snow:
         UpdateSnow(dt, cameraPosition);
         break;
+    case sand:
+        UpdateSand(dt, cameraPosition);
     default:
         std::cerr << "No particle type set";
         break;
@@ -107,6 +109,32 @@ void ParticleSystem::UpdateRain(float dt, Vector3 cameraPosition)
             positionData[4 * particlesCount] = p.pos.x;
             positionData[4 * particlesCount + 1] = p.pos.y;
             positionData[4 * particlesCount + 2] = p.pos.z;
+            positionData[4 * particlesCount + 3] = p.size;
+
+        }
+        else {
+            p.cameraDistance = -1.0f;
+            positionData[4 * particlesCount] = -1000;
+            positionData[4 * particlesCount + 1] = -1000;
+            positionData[4 * particlesCount + 2] = -1000;
+            positionData[4 * particlesCount + 3] = p.size;
+        }
+        particlesCount++;
+    }
+}
+
+void ParticleSystem::UpdateSand(float dt, Vector3 cameraPosition)
+{
+    for (int i = 0; i < MAX_PARTICLES; i++) {
+        Particle& p = particles[i];
+        if (p.life > 0.0f) {
+            p.life -= dt;
+            p.pos -= p.speed * dt;
+            p.cameraDistance = Vector3(p.pos - cameraPosition).Length();
+
+            positionData[4 * particlesCount] = p.pos.x;
+            positionData[4 * particlesCount + 1] = p.pos.y;
+            positionData[4 * particlesCount + 2] = p.pos.z * sin(p.life);
             positionData[4 * particlesCount + 3] = p.size;
 
         }
