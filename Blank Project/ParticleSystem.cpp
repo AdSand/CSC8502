@@ -63,6 +63,7 @@ void ParticleSystem::UpdateParticles(float dt, Vector3 cameraPosition)
         break;
     case sand:
         UpdateSand(dt, cameraPosition);
+        break;
     default:
         std::cerr << "No particle type set";
         break;
