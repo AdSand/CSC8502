@@ -1,11 +1,11 @@
 #include "ParticleSystem.h"
 
-ParticleSystem::ParticleSystem(Vector3 startPos, Vector3 rngLower, Vector3 rngHigher, int particlesPerBurst, float particleSpeed, float lifeSpan, float particleSize, float timeBetween, GLuint texture, Type type)
+ParticleSystem::ParticleSystem(Vector3 startPos, Vector3 rngLower, Vector3 rngHigher, int particlesPerBurst, Vector3 startSpeed, float lifeSpan, float particleSize, float timeBetween, GLuint texture, Type type)
 {
     lastUsedParticle = 0;
     this->texture = texture;
     this->particlesPerBurst = particlesPerBurst;
-    this->particleSpeed = particleSpeed;
+    this->startSpeed = startSpeed;
     this->lifespan = lifeSpan;
     this->particleSize = particleSize;
     this->startPos = startPos;
@@ -135,7 +135,7 @@ void ParticleSystem::UpdateSand(float dt, Vector3 cameraPosition)
 
             positionData[4 * particlesCount] = p.pos.x;
             positionData[4 * particlesCount + 1] = p.pos.y;
-            positionData[4 * particlesCount + 2] = p.pos.z * sin(p.life);
+            positionData[4 * particlesCount + 2] = p.pos.z;
             positionData[4 * particlesCount + 3] = p.size;
 
         }
@@ -167,7 +167,7 @@ void ParticleSystem::CreateNewParticles(float dt)
             Vector3(rngLowerBound.x + rand() % (int)rngRange.x,
                 rngLowerBound.y + rand() % (int)rngRange.y,
                 rngLowerBound.z + rand() % (int)rngRange.z);
-        particles[particleIndex].speed = Vector3(0, particleSpeed, 0);
+        particles[particleIndex].speed = startSpeed;
         particles[particleIndex].size = particleSize;
     }
 }

@@ -31,7 +31,7 @@ class ParticleSystem
 {
 public:
     ParticleSystem(Vector3 startPos, Vector3 rngLower, Vector3 rngHigher, int particlesPerBurst,
-        float particleSpeed, float lifeSpan, float particleSize, float timeBetween, GLuint texture, Type type);
+        Vector3 startSpeed, float lifeSpan, float particleSize, float timeBetween, GLuint texture, Type type);
     ~ParticleSystem();
 
     void UpdateParticles(float dt, Vector3 cameraPosition);
@@ -63,7 +63,7 @@ protected:
 
     int particlesCount;
     float lifespan;
-    float particleSpeed;
+    Vector3 startSpeed;
     float particleSize;
 
     float timeBetween = 1.0f;
