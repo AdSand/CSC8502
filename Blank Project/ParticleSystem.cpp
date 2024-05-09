@@ -1,6 +1,6 @@
 #include "ParticleSystem.h"
 
-ParticleSystem::ParticleSystem(Vector3 startPos, Vector3 rngLower, Vector3 rngHigher, int particlesPerBurst, Vector3 startSpeed, float lifeSpan, float particleSize, float timeBetween, GLuint texture, Type type)
+ParticleSystem::ParticleSystem(Vector3 rngLower, Vector3 rngHigher, int particlesPerBurst, Vector3 startSpeed, float lifeSpan, float particleSize, float timeBetween, GLuint texture, Type type)
 {
     lastUsedParticle = 0;
     this->texture = texture;
@@ -8,7 +8,6 @@ ParticleSystem::ParticleSystem(Vector3 startPos, Vector3 rngLower, Vector3 rngHi
     this->startSpeed = startSpeed;
     this->lifespan = lifeSpan;
     this->particleSize = particleSize;
-    this->startPos = startPos;
     this->rngLowerBound = rngLower;
     this->rngRange = Vector3(rngHigher.x - rngLower.x, rngHigher.y - rngLower.y, rngHigher.z - rngLower.z);
     this->timeBetween = timeBetween;

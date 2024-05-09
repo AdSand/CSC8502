@@ -30,7 +30,7 @@ struct Particle {
 class ParticleSystem
 {
 public:
-    ParticleSystem(Vector3 startPos, Vector3 rngLower, Vector3 rngHigher, int particlesPerBurst,
+    ParticleSystem( Vector3 rngLower, Vector3 rngHigher, int particlesPerBurst,
         Vector3 startSpeed, float lifeSpan, float particleSize, float timeBetween, GLuint texture, Type type);
     ~ParticleSystem();
 
