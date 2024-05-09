@@ -43,6 +43,7 @@ public:
     GLuint GetTexture() { return texture; }
     int GetParticleCount() { return particlesCount; }
     Particle GetParticle() { return particles[0]; }
+    void SetStartPos(Vector3 pos) { startPos = pos; }
 
 protected:
     GLuint texture;
