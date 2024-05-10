@@ -208,7 +208,16 @@ void Renderer::UpdateParticleSystems(float dt)
 		ps->UpdateParticles(dt, camera->GetPosition());
 		totalUpdatedParticles += ps->GetUpdatedParticles();
 	}
-	std::cout << totalUpdatedParticles << " AND " << 1/dt << std::endl;
+	WriteToFile("frames.txt", 1 / dt);
+	WriteToFile("updatedparticles.txt", totalUpdatedParticles);
+}
+
+void Renderer::WriteToFile(string filename, float value)
+{
+	std::ofstream myFile;
+	myFile.open(filename, std::ios_base::app);
+	myFile << value << std::endl;;
+	myFile.close();
 }
 
 void Renderer::SetupSpaceScene()

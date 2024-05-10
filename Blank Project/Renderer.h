@@ -189,6 +189,8 @@ protected:
 	ParticleSystem* snowParticles;
 	ParticleSystem* sandParticles;
 
+	void WriteToFile(string filename, float value);
+
 
 	void SetupSpaceScene();
 	SceneNode* spaceRoot;
