@@ -51,6 +51,7 @@ ParticleSystem::~ParticleSystem()
 void ParticleSystem::UpdateParticles(float dt, Vector3 cameraPosition)
 {
     particlesCount = 0;
+    updatedParticles = 0;
 
     switch (type)
     {
@@ -85,6 +86,7 @@ void ParticleSystem::UpdateSnow(float dt, Vector3 cameraPosition)
             positionData[4 * particlesCount + 2] = p.pos.z;
             positionData[4 * particlesCount + 3] = p.size;
 
+            updatedParticles++;
         }
         else {
             p.cameraDistance = -1.0f;
@@ -111,6 +113,7 @@ void ParticleSystem::UpdateRain(float dt, Vector3 cameraPosition)
             positionData[4 * particlesCount + 2] = p.pos.z;
             positionData[4 * particlesCount + 3] = p.size;
 
+            updatedParticles++;
         }
         else {
             p.cameraDistance = -1.0f;
@@ -137,6 +140,7 @@ void ParticleSystem::UpdateSand(float dt, Vector3 cameraPosition)
             positionData[4 * particlesCount + 2] = p.pos.z;
             positionData[4 * particlesCount + 3] = p.size;
 
+            updatedParticles++;
         }
         else {
             p.cameraDistance = -1.0f;

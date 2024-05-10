@@ -41,9 +41,9 @@ public:
     void CreateNewParticles(float dt);
     void DrawParticles();
     GLuint GetTexture() { return texture; }
-    int GetParticleCount() { return particlesCount; }
     Particle GetParticle() { return particles[0]; }
     void SetStartPos(Vector3 pos) { startPos = pos; }
+    int GetUpdatedParticles() { return updatedParticles; }
 
 protected:
     GLuint texture;
@@ -75,5 +75,7 @@ protected:
 
     int FindUnusedParticle();
     void SortParticles() { std::sort(&particles[0], &particles[MAX_PARTICLES]); }
+
+    int updatedParticles = 0;
 };
 
