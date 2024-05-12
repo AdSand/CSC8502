@@ -194,7 +194,7 @@ void Renderer::SetupParticleSystems()
 	snowParticles = new ParticleSystem({-3000, 700, -3000}, { 3000, 1, 3000 }, 20, {0, -300, 0}, 4, 12.25f, 0.25f, snowTex, snow);
 	particleSystems.push_back(snowParticles);
 
-	//sandParticles = new ParticleSystem({ 0, 0, 0 }, { 3000, 900, 30 }, 45, {0, 0, 450}, 4, 4.25f, 0.15f, sandTex, sand);
+	//sandParticles = new ParticleSystem({ -1000, -200, -1000 }, { 3000, 900, 30 }, 45, {0, 0, 450}, 4, 4.25f, 0.15f, sandTex, sand);
 	//particleSystems.push_back(sandParticles);
 }
 

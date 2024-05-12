@@ -79,6 +79,8 @@ void ParticleSystem::UpdateSnow(float dt, Vector3 cameraPosition)
         if (p.life > 0.0f) {
             p.life -= dt;
             p.pos += p.speed * dt;
+            p.pos.x += sin(p.pos.y * 0.005) * dt * 250;
+            p.pos.z += sin(p.pos.y * 0.005) * dt * 250;
 
             p.cameraDistance = Vector3(p.pos - cameraPosition).Length();
 
@@ -134,6 +136,8 @@ void ParticleSystem::UpdateSand(float dt, Vector3 cameraPosition)
         if (p.life > 0.0f) {
             p.life -= dt;
             p.pos += p.speed * dt;
+            p.pos.y += sin(p.pos.z * 0.005) * dt * 25;
+
             p.cameraDistance = Vector3(p.pos - cameraPosition).Length();
 
             positionData[4 * particlesCount] = p.pos.x;
