@@ -188,10 +188,10 @@ void Renderer::DrawRoleT()
 
 void Renderer::SetupParticleSystems()
 {
-	//rainParticles = new ParticleSystem({-3000, 700, -3000}, {3000, 1, 3000}, 40, {0, -850, 0}, 2, 13.25f, 0.1f, rainTex, rain);
+	//rainParticles = new ParticleSystem({-3000, 700, -3000}, {3000, 701, 3000}, 40, {0, -850, 0}, 2, 13.25f, 0.1f, rainTex, rain);
 	//particleSystems.push_back(rainParticles);
 
-	snowParticles = new ParticleSystem({-3000, 700, -3000}, { 3000, 1, 3000 }, 20, {0, -300, 0}, 4, 12.25f, 0.25f, snowTex, snow);
+	snowParticles = new ParticleSystem({-3000, 700, -3000}, { 3000, 701, 3000 }, 20, {0, -300, 0}, 4, 12.25f, 0.25f, snowTex, snow);
 	particleSystems.push_back(snowParticles);
 
 	//sandParticles = new ParticleSystem({ -1000, -200, -1000 }, { 3000, 900, 30 }, 45, {0, 0, 450}, 4, 4.25f, 0.15f, sandTex, sand);
