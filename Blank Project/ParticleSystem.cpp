@@ -93,9 +93,9 @@ void ParticleSystem::UpdateSnow(float dt, Vector3 cameraPosition)
         }
         else {
             p.cameraDistance = -1.0f;
-            positionData[4 * particlesCount] = -1000;
-            positionData[4 * particlesCount + 1] = -1000;
-            positionData[4 * particlesCount + 2] = -1000;
+            positionData[4 * particlesCount] = -100000;
+            positionData[4 * particlesCount + 1] = -100000;
+            positionData[4 * particlesCount + 2] = -100000;
             positionData[4 * particlesCount + 3] = p.size;
         }
         particlesCount++;
@@ -120,9 +120,9 @@ void ParticleSystem::UpdateRain(float dt, Vector3 cameraPosition)
         }
         else {
             p.cameraDistance = -1.0f;
-            positionData[4 * particlesCount] = -1000;
-            positionData[4 * particlesCount + 1] = -1000;
-            positionData[4 * particlesCount + 2] = -1000;
+            positionData[4 * particlesCount] = -100000;
+            positionData[4 * particlesCount + 1] = -100000;
+            positionData[4 * particlesCount + 2] = -100000;
             positionData[4 * particlesCount + 3] = p.size;
         }
         particlesCount++;
@@ -149,9 +149,9 @@ void ParticleSystem::UpdateSand(float dt, Vector3 cameraPosition)
         }
         else {
             p.cameraDistance = -1.0f;
-            positionData[4 * particlesCount] = -1000;
-            positionData[4 * particlesCount + 1] = -1000;
-            positionData[4 * particlesCount + 2] = -1000;
+            positionData[4 * particlesCount] = -100000;
+            positionData[4 * particlesCount + 1] = -100000;
+            positionData[4 * particlesCount + 2] = -100000;
             positionData[4 * particlesCount + 3] = p.size;
         }
         particlesCount++;
